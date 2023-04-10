@@ -4,7 +4,7 @@ type PropsType = {
     tasks: Array<TaskType>
 }
 type TaskType = {
-    taskId: number
+    taskId: string
     title: string
     isDone: boolean
 }

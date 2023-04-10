@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid'
 import './App.css';
 import { Todolist } from './components/Todolist';
 
@@ -6,15 +7,15 @@ export const App=()=> {
     //test
     const titleValue='asdfadfadfasdfkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk';
     const tasks1= [
-        {taskId: 1, title: "HTML&CSS1", isDone: true},
-        {taskId: 2, title: "JS1", isDone: true},
-        {taskId: 3, title: "TS", isDone: false}
+        {taskId: uuid(), title: "HTML&CSS1", isDone: true},
+        {taskId: uuid(), title: "JS1", isDone: true},
+        {taskId: uuid(), title: "TS", isDone: false}
     ];
     const tasks2= [
-        {taskId: 1, title: "HTML&CSS2", isDone: true},
-        {taskId: 2, title: "JS2", isDone: true},
-        {taskId: 3, title: "TS2", isDone: false},
-        {taskId: 4, title: "PHP", isDone: true}
+        {taskId: uuid(), title: "HTML&CSS2", isDone: true},
+        {taskId: uuid(), title: "JS2", isDone: true},
+        {taskId: uuid(), title: "TS2", isDone: false},
+        {taskId: uuid(), title: "PHP", isDone: true}
     ]
     return (
         <div className="App">
