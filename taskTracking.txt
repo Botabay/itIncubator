@@ -14,14 +14,14 @@ lesson3 -
 
 -------- begin from notRequiredMicroAdds----------
 lesson1 +
-lesson2
+lesson2 +
 lesson3
 -------- end from notRequiredMicroAdds---------
 
 
 
 -------- begin from microtasks----------
-lesson1 
+lesson1 +
 lesson2
 lesson3
 -------- end from microtasks---------
