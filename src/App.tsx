@@ -4,6 +4,25 @@ import './App.css';
 import { Todolist } from './components/Todolist';
 
 export const App=()=> {
+    let tasks= [
+        {taskId: uuid(), title: "HTML&CSS1", isDone: true},
+        {taskId: uuid(), title: "JS1", isDone: true},
+        {taskId: uuid(), title: "TS", isDone: false}
+    ];
+    const removeTask=(taskId:string)=>{
+        tasks=tasks.filter(el=>el.taskId!=taskId);
+        console.log(tasks);
+        
+    }
+    return (
+        <div className="App">
+            <Todolist title={'What to learn'} body={'this is body'} tasks={tasks} callback={removeTask}/>
+        </div>
+    );
+}
+
+/**
+ * export const App=()=> {
     //test
     const titleValue='asdfadfadfasdfkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk';
     const tasks1= [
@@ -20,8 +39,9 @@ export const App=()=> {
     return (
         <div className="App">
             <Todolist title={'What to learn'} body={'this is body'} tasks={tasks1}/>
-            <Todolist title={'What to remember'} tasks={tasks2}/>
-            {/* <Todolist title={titleValue}/> */}
-        </div>
-    );
-}
+            {/* <Todolist title={'What to remember'} tasks={tasks2}/> }
+            {/* <Todolist title={titleValue}/> }
+            </div>
+            );
+        }
+ */

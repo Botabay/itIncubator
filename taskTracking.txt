@@ -1,0 +1,26 @@
+-------- begin from lessons----------
+lesson1 +
+lesson2
+
+-------- end from lessons------------
+
+
+
+-------- begin from addLessons----------
+#1 12.04.2023
+-------- end from addLessons---------
+
+
+
+-------- begin from notRequiredMicroAdds----------
+lesson1 
+lesson2
+
+-------- end from notRequiredMicroAdds---------
+
+
+
+-------- begin from microtasks----------
+lesson1 
+lesson2
+-------- end from microtasks---------

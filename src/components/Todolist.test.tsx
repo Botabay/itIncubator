@@ -10,12 +10,13 @@ const data={
         {taskId: uuid(), title: "HTML&CSS1", isDone: true},
         {taskId: uuid(), title: "JS1", isDone: true},
         {taskId: uuid(), title: "TS", isDone: false}
-    ]
+    ],
+    callback:()=>{ }
 }
 
 describe('List component', ()=>{
     it("List renders",()=>{
-        render(<Todolist title={data.title} tasks={data.tasks}/>)
+        render(<Todolist title={data.title} tasks={data.tasks} callback={data.callback}/>)
 
         expect(screen.getByText(/hu/)).toBeInTheDocument();
     })

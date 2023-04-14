@@ -2,6 +2,7 @@ type PropsType = {
     title: string
     body?: string
     tasks: Array<TaskType>
+    callback:(taskId:string)=>void
 }
 type TaskType = {
     taskId: string
@@ -9,6 +10,9 @@ type TaskType = {
     isDone: boolean
 }
 export const Todolist = (props: PropsType) => {
+    const onClickHandler=(taskId:string)=>{
+        props.callback(taskId)
+    }
     return (
         <div>
             <h3>{props.title}</h3>
@@ -20,7 +24,11 @@ export const Todolist = (props: PropsType) => {
             <ul>
                 {props.tasks.map((el)=>{
                     return (
-                        <li key={el.taskId}><input type="checkbox" checked={el.isDone} /> <span>{el.title}</span></li>
+                        <li key={el.taskId}>
+                            <button onClick={()=>{onClickHandler(el.taskId)}}>x</button>
+                            <input type="checkbox" checked={el.isDone} /> 
+                            <span>{el.title}</span>
+                        </li>
                     )
                 })}
                 
