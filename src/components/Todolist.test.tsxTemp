@@ -11,12 +11,14 @@ const data={
         {taskId: uuid(), title: "JS1", isDone: true},
         {taskId: uuid(), title: "TS", isDone: false}
     ],
-    callback:()=>{ }
+    removeTask:()=>{ },
+    setFilterSt:()=>{}
 }
 
 describe('List component', ()=>{
     it("List renders",()=>{
-        render(<Todolist title={data.title} tasks={data.tasks} callback={data.callback}/>)
+        render(<Todolist title={data.title} tasks={data.tasks}
+            removeTask={data.removeTask} setFilterSt={data.setFilterSt}/>)
 
         expect(screen.getByText(/hu/)).toBeInTheDocument();
     })

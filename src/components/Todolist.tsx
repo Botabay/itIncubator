@@ -1,8 +1,10 @@
+import {FilterType} from '../App'
 type PropsType = {
     title: string
     body?: string
     tasks: Array<TaskType>
-    callback:(taskId:string)=>void
+    removeTask:(taskId:string)=>void
+    changeFilter:(filter:FilterType)=>void
 }
 type TaskType = {
     taskId: string
@@ -11,7 +13,7 @@ type TaskType = {
 }
 export const Todolist = (props: PropsType) => {
     const onClickHandler=(taskId:string)=>{
-        props.callback(taskId)
+        props.removeTask(taskId)
     }
     return (
         <div>
@@ -26,7 +28,7 @@ export const Todolist = (props: PropsType) => {
                     return (
                         <li key={el.taskId}>
                             <button onClick={()=>{onClickHandler(el.taskId)}}>x</button>
-                            <input type="checkbox" checked={el.isDone} /> 
+                            <input type="checkbox" checked={el.isDone} onChange={()=>{ }}/> 
                             <span>{el.title}</span>
                         </li>
                     )
@@ -34,9 +36,9 @@ export const Todolist = (props: PropsType) => {
                 
             </ul>
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <button onClick={()=>{props.changeFilter('all')}}>All</button>
+                <button onClick={()=>{props.changeFilter('active')}}>Active</button>
+                <button onClick={()=>{props.changeFilter('completed')}}>Completed</button> 
             </div>
         </div>
     )
