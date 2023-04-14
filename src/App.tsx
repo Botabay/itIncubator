@@ -4,7 +4,14 @@ import './App.css';
 import { Todolist } from './components/Todolist';
 import {Tasks} from './components/Tasks'
 
-export type FilterType='all'|'active'|'completed';
+/* notRequiredMicroAdds #2
+Hi guys! 
+1. Let's create a 'DELETE ALL TASKS' button, and place it above the filter buttons
+Clicking the button removes all tasks
+2. Let's create a fourth filter button-if you click it, the first three tasks will be displayed
+3. Relocate everything associated with  filters to the Todolist.tsx component. Make it work*/
+
+
 export type DataType={
     title:string
     tasks:TasksType[]
@@ -132,7 +139,10 @@ export const App=()=> {
     const tasks= [
         {taskId: uuid(), title: "HTML&CSS1", isDone: true},
         {taskId: uuid(), title: "JS1", isDone: true},
-        {taskId: uuid(), title: "TS", isDone: false}
+        {taskId: uuid(), title: "TS1", isDone: false},
+        {taskId: uuid(), title: "HTML&CSS2", isDone: true},
+        {taskId: uuid(), title: "JS2", isDone: true},
+        {taskId: uuid(), title: "TS2", isDone: false}
     ];
 
     let [tasksSt,setTasksSt]=useState(tasks)
@@ -143,27 +153,15 @@ export const App=()=> {
         setTasksSt(newTasks)
         console.log(tasksSt);
     }
-
-    let filteredTasks=tasksSt;
-    let [filterSt,setFilterSt]=useState<FilterType>('all')
-
-    if(filterSt==='active'){
-        filteredTasks=tasksSt.filter(el=>el.isDone)    }
-
-    if(filterSt==='completed'){
-        filteredTasks=tasksSt.filter(el=>!el.isDone)
-    }
-
-    const changeFilter=(filter:FilterType)=>{
-        setFilterSt(filter)
+    const removeAllTasks=()=>{
+        setTasksSt([])
     }
     return (
         <div className="App">
             <div>
                 <Todolist title={'What to learn'} body={'this is body'}
-                tasks={filteredTasks} removeTask={removeTask} changeFilter={changeFilter}/>
-            </div>
-            
+                tasks={tasksSt} removeTask={removeTask} removeAllTasks={removeAllTasks}/>
+            </div>            
 
             <div>
                 <Tasks data={data1}/>
