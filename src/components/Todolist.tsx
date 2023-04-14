@@ -1,4 +1,5 @@
-import {FilterType} from '../App'
+import {FilterType} from '../App';
+
 type PropsType = {
     title: string
     body?: string
@@ -15,6 +16,8 @@ export const Todolist = (props: PropsType) => {
     const onClickHandler=(taskId:string)=>{
         props.removeTask(taskId)
     }
+
+
     return (
         <div>
             <h3>{props.title}</h3>

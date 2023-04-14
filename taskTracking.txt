@@ -1,7 +1,7 @@
 -------- begin from lessons----------
 lesson1 +
-lesson2
-
+lesson2 +
+lesson3 -
 -------- end from lessons------------
 
 
@@ -15,7 +15,7 @@ lesson2
 -------- begin from notRequiredMicroAdds----------
 lesson1 
 lesson2
-
+lesson3
 -------- end from notRequiredMicroAdds---------
 
 
@@ -23,4 +23,5 @@ lesson2
 -------- begin from microtasks----------
 lesson1 
 lesson2
+lesson3
 -------- end from microtasks---------
