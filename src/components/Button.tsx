@@ -4,7 +4,7 @@ type PropsType={
 }
 export const Button=(props:PropsType)=>{
     const onClickHandler=()=>{
-        console.log('button');
+        props.callback()
     }
     return(
         <button onClick={onClickHandler}>{props.name}</button>
