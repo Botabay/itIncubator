@@ -30,41 +30,35 @@ export const Todolist = (props: PropsType) => {
         { taskId: uuid(), title: "JS2", isDone: true },
         { taskId: uuid(), title: "TS2", isDone: false }
     ];
-
-    let filteredTasks = tasks;
+    let [tasksSt, setTasksSt] = useState(tasks)
+    let filteredTasks = tasksSt;
+    
     let [filterSt, setFilterSt] = useState<FilterType>('all')
 
     if (filterSt === 'active') {
-        filteredTasks = tasks.filter(el => el.isDone)
+        filteredTasks = tasksSt.filter(el => !el.isDone)
     }
 
     if (filterSt === 'completed') {
-        filteredTasks = tasks.filter(el => !el.isDone)
+        filteredTasks = tasksSt.filter(el => el.isDone)
     }
 
     if (filterSt === 'three') {
-        filteredTasks = tasks.filter((el, ind) => ind < 3)
+        filteredTasks = tasksSt.filter((el, ind) => ind < 3)
     }
 
     const changeFilter = (filter: FilterType) => {
         setFilterSt(filter)
     }
 
-    let [tasksSt, setTasksSt] = useState(tasks)
-
     const removeTask = (taskId: string) => {
         const newTasks = tasksSt.filter(el => el.taskId != taskId);
-        // console.log(tasks);     
         setTasksSt(newTasks)
-        console.log(tasksSt);
     }
     const removeAllTasks = () => {
         setTasksSt([])
     }
 
-    const addTask = (value: string) => {
-        // setI(value)
-    }
     const onClickHandler = (taskId: string) => {
         removeTask(taskId)
     }
@@ -74,20 +68,24 @@ export const Todolist = (props: PropsType) => {
 
     //------
     let [inpSt,setInpSt]=useState('');
-
-    //-----
+    const addTask = () => {
+        setTasksSt([{taskId:uuid(), title:inpSt,isDone:false},...tasksSt])
+        filteredTasks = tasks;
+        setInpSt('')
+    }
+    //-----    
     return (
         <div>
             <h3>{props.title}</h3>
             <p>{props.body}</p>
             <div>
                 <Input callback={setInpSt} value={inpSt} />
-                <Button name={'+'} callback={() => { }} />
+                <Button name={'+'} callback={addTask} />
                 {/* <input />
                 <button>+</button> */}
             </div>
             <ul>
-                {filteredTasks.map((el) => {
+                {filteredTasks.map( el => {
                     return (
                         <li key={el.taskId}>
                             <button onClick={() => { onClickHandler(el.taskId) }}>x</button>
