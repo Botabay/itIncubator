@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { DataType } from "./Body";
+import { DataType } from "./Todolist";
 import { NewComponent } from './NewComponent'
 //notRequiredMicroAdds #1
 // Hi Guys!
