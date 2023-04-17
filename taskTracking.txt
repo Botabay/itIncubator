@@ -1,27 +1,56 @@
 -------- begin from lessons----------
 lesson1 +
 lesson2 +
-lesson3 -
+lesson3 +
+lesson4
 -------- end from lessons------------
-
 
 
 -------- begin from addLessons----------
 #1 12.04.2023
+#2 14.04.2023
 -------- end from addLessons---------
-
 
 
 -------- begin from notRequiredMicroAdds----------
 lesson1 +
 lesson2 +
 lesson3
+lesson4
 -------- end from notRequiredMicroAdds---------
-
 
 
 -------- begin from microtasks----------
 lesson1 +
-lesson2 made varint2(it's non-uniButton)
+lesson2 + made varint2(it's non-uniButton)
 lesson3
+lesson4
 -------- end from microtasks---------
+
+
+-----------------------------------------------------------------------------------------------------
+--------------if i have too mucht time for it--------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+
+-------- begin from autoCheckHomework----------
+lesson1 
+lesson2 
+lesson3
+lesson4
+-------- end from autoCheckHomework---------
+
+
+-------- begin from samur_kabzda----------
+lesson1 
+lesson2 
+lesson3
+lesson4
+-------- end from samur_kabzda---------
+
+
+-------- begin from lessonsVideoByDimych----------
+lesson1 
+lesson2 
+lesson3
+lesson4
+-------- end from lessonsVideoByDimych---------

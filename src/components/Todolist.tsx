@@ -52,7 +52,7 @@ export const Todolist = (props: PropsType) => {
     }
 
     const removeTask = (taskId: string) => {
-        const newTasks = tasksSt.filter(el => el.taskId != taskId);
+        const newTasks = tasksSt.filter(el => el.taskId !== taskId);
         setTasksSt(newTasks)
     }
     const removeAllTasks = () => {
@@ -67,7 +67,7 @@ export const Todolist = (props: PropsType) => {
     }
 
     //------
-    let [inpSt,setInpSt]=useState('');
+    const [inpSt,setInpSt]=useState('');
     const addTask = () => {
         setTasksSt([{taskId:uuid(), title:inpSt,isDone:false},...tasksSt])
         filteredTasks = tasks;
@@ -79,8 +79,8 @@ export const Todolist = (props: PropsType) => {
             <h3>{props.title}</h3>
             <p>{props.body}</p>
             <div>
-                <Input callback={setInpSt} value={inpSt} />
-                <Button name={'+'} callback={addTask} />
+                <Input setInpSt={setInpSt} value={inpSt} callback={addTask}/>
+                <Button name={'+'} callback={addTask}/>
                 {/* <input />
                 <button>+</button> */}
             </div>
