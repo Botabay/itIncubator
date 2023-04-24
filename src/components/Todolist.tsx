@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid'
 import { useState } from 'react';
 import { Input } from "./Input";
 import { Button } from './Button'
-import {useAutoAnimate} from '@formkit/auto-animate/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 //3. Let's append some animation in our project:
 //yarn add  @formkit/auto-animate -D
@@ -45,7 +45,7 @@ export const Todolist = (props: PropsType) => {
     ];
     let [tasksSt, setTasksSt] = useState(tasks)
     let filteredTasks = tasksSt;
-    
+
     let [filterSt, setFilterSt] = useState<FilterType>('all')
 
     if (filterSt === 'active') {
@@ -75,14 +75,14 @@ export const Todolist = (props: PropsType) => {
     const onClickHandler = (taskId: string) => {
         removeTask(taskId)
     }
-    const removeAllButtononClickHandler = () => {        
+    const removeAllButtononClickHandler = () => {
         removeAllTasks()
     }
 
     //------
-    const [inpSt,setInpSt]=useState('');
+    const [inpSt, setInpSt] = useState('');
     const addTask = () => {
-        setTasksSt([{taskId:uuid(), title:inpSt,isDone:false},...tasksSt])
+        setTasksSt([{ taskId: uuid(), title: inpSt, isDone: false }, ...tasksSt])
         filteredTasks = tasks;
         setInpSt('')
     }
@@ -92,16 +92,17 @@ export const Todolist = (props: PropsType) => {
             <h3>{props.title}</h3>
             <p>{props.body}</p>
             <div>
-                <Input setInpSt={setInpSt} value={inpSt} callback={addTask}/>
-                <Button name={'+'} callback={addTask}/>
+                <Input setInpSt={setInpSt} value={inpSt} callback={addTask} />
+                <Button name={'+'} callback={addTask} />
                 {/* <input />
                 <button>+</button> */}
             </div>
             <ul ref={listRef}>
-                {filteredTasks.map( el => {
+                {filteredTasks.map(el => {
                     return (
                         <li key={el.taskId}>
-                            <button onClick={() => { onClickHandler(el.taskId) }}>x</button>
+                            {/* <button onClick={() => { onClickHandler(el.taskId) }}>x</button> */}
+                            <Button name={'x'} callback={() => { onClickHandler(el.taskId) }} />
                             <input type="checkbox" checked={el.isDone} onChange={() => { }} />
                             <span>{el.title}</span>
                         </li>
@@ -110,10 +111,14 @@ export const Todolist = (props: PropsType) => {
 
             </ul>
             <div>
-                <button onClick={() => { changeFilter('all') }}>All</button>
+                <Button name={'All'} callback={() => { changeFilter('all') }} />
+                <Button name={'Active'} callback={() => { changeFilter('active') }} />
+                <Button name={'Completed'} callback={() => { changeFilter('completed')  }} />
+                <Button name={'Three'} callback={() => { changeFilter('three') }} />
+                {/* <button onClick={() => { changeFilter('all') }}>All</button>
                 <button onClick={() => { changeFilter('active') }}>Active</button>
                 <button onClick={() => { changeFilter('completed') }}>Completed</button>
-                <button onClick={() => { changeFilter('three') }}>Three</button>
+                <button onClick={() => { changeFilter('three') }}>Three</button> */}
             </div>
             <div>
                 <button onClick={removeAllButtononClickHandler}>remove all tasks</button>

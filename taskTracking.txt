@@ -7,15 +7,15 @@ lesson4
 
 
 -------- begin from addLessons----------
-#1 12.04.2023
-#2 14.04.2023
+#1 12.04.2023 - superbutton
+#2 14.04.2023 --
 -------- end from addLessons---------
 
 
 -------- begin from notRequiredMicroAdds----------
 lesson1 +
 lesson2 +
-lesson3 + не смог запустить useAutoAnimate, how to type the useRef() initialValue???????????? --
+lesson3 + не смог запустить useAutoAnimate, how to type the useRef() initialValue????????????
 lesson4
 -------- end from notRequiredMicroAdds---------
 
@@ -23,8 +23,8 @@ lesson4
 -------- begin from microtasks----------
 lesson1 +
 lesson2 + made varint2(it's non-uniButton)
-lesson3
-lesson4
+lesson3 does not exist
+lesson4 does not exist
 -------- end from microtasks---------
 
 
