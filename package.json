@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@formkit/auto-animate": "^1.0.0-beta.6",
     "@types/uuid": "^9.0.1"
   }
 }

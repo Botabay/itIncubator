@@ -2,6 +2,19 @@ import { v4 as uuid } from 'uuid'
 import { useState } from 'react';
 import { Input } from "./Input";
 import { Button } from './Button'
+import {useAutoAnimate} from '@formkit/auto-animate/react'
+
+//3. Let's append some animation in our project:
+//yarn add  @formkit/auto-animate -D
+// we use -D, because the best practice is to add new extensions to the object inside the package.json
+// "devDependencies": {
+//     "@formkit/auto-animate": "^1.0.0-beta.3"
+//   }
+// const [listRef] = useAutoAnimate<HTMLUListElement>() in Todolist.tsx
+// <ul ref={listRef}>
+//Look how smoothly the tasks are added!
+//P.S. Do you understand why a new task append in all Todolists?
+// [because we only have one state for all our todolists, but we'll talk about that on Tuesday.]
 
 type FilterType = 'all' | 'active' | 'completed' | 'three';
 
@@ -21,7 +34,7 @@ type TasksType = {
     isDone: boolean
 }
 export const Todolist = (props: PropsType) => {
-
+    const [listRef] = useAutoAnimate<HTMLUListElement>()
     const tasks = [
         { taskId: uuid(), title: "HTML&CSS1", isDone: true },
         { taskId: uuid(), title: "JS1", isDone: true },
@@ -84,7 +97,7 @@ export const Todolist = (props: PropsType) => {
                 {/* <input />
                 <button>+</button> */}
             </div>
-            <ul>
+            <ul ref={listRef}>
                 {filteredTasks.map( el => {
                     return (
                         <li key={el.taskId}>
