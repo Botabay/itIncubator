@@ -7,8 +7,10 @@ export const App = () => {
     
     return (
         <div className="App">
-            <Header title={'the title'} />
+            <Header title={'the title of the header'} />
+            ============================================
             <Body />            
+            =============================================
             <Footer footerTitle={'the title for the footer'} />            
         </div>
     );

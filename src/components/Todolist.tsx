@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from "./Input";
 import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
@@ -33,7 +33,43 @@ type TasksType = {
     title: string
     isDone: boolean
 }
+type FetchDataType={
+    id:number
+    title:string|undefined
+    completed:boolean
+}
 export const Todolist = (props: PropsType) => {
+    //////
+    const [todosSt, setTodosSt] = useState<FetchDataType[]>([])
+    const fetchRequest = () => {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(json => setTodosSt(json))
+    }
+    useEffect(() => {
+        fetchRequest()
+    }, [])
+    const showTodos = () => {
+        fetchRequest()
+    }
+    const hideTodos = () => {
+        setTodosSt([])
+    }
+
+    // let [inputSt,setInputSt]=useState('')//must use useRef('') for avoid a multi-requesting
+    // console.log(todosSt)
+    // let inpRef=useRef<HTMLInputElement>(null)//must use useRef('') for avoid a multi-requesting
+
+    // const addTodo=()=>{        
+    //     setTodosSt([{id:todosSt.length+1,title:inpRef.current.value,completed:true},...todosSt])
+    //     inpRef.current.value='';
+    // }
+    // const onClickHandlerSuper=(value:string)=>{
+    //     // inpRef.current=value;
+    // }
+    //////
+
+
     const [listRef] = useAutoAnimate<HTMLUListElement>()
     const tasks = [
         { taskId: uuid(), title: "HTML&CSS1", isDone: true },
@@ -113,7 +149,7 @@ export const Todolist = (props: PropsType) => {
             <div>
                 <Button name={'All'} callback={() => { changeFilter('all') }} />
                 <Button name={'Active'} callback={() => { changeFilter('active') }} />
-                <Button name={'Completed'} callback={() => { changeFilter('completed')  }} />
+                <Button name={'Completed'} callback={() => { changeFilter('completed') }} />
                 <Button name={'Three'} callback={() => { changeFilter('three') }} />
                 {/* <button onClick={() => { changeFilter('all') }}>All</button>
                 <button onClick={() => { changeFilter('active') }}>Active</button>
@@ -123,6 +159,11 @@ export const Todolist = (props: PropsType) => {
             <div>
                 <button onClick={removeAllButtononClickHandler}>remove all tasks</button>
             </div>
+            ================================begin tasks from fetch========================================
+            <div>
+                {todosSt.map(el => <li>{el.title}</li>)}
+            </div>
+            ================================end tasks from fetch========================================
         </div>
     )
 }

@@ -16,7 +16,7 @@ export const Body = () => {
         <Todolist title={'What to learn'} body={'this is body'}/>
       </div>
       <div>
-        <Tasks />
+        {/* <Tasks /> */}
       </div>
     </div >
   )
