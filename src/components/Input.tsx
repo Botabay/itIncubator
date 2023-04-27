@@ -1,6 +1,6 @@
 import { KeyboardEvent, ChangeEvent } from "react";
 type PropsType={
-    setInpSt:any
+    setInpSt:React.Dispatch<React.SetStateAction<string>>
     value:string
     callback:()=>void
 }

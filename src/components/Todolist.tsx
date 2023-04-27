@@ -3,18 +3,7 @@ import { useState, useEffect } from 'react';
 import { Input } from "./Input";
 import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-
-//3. Let's append some animation in our project:
-//yarn add  @formkit/auto-animate -D
-// we use -D, because the best practice is to add new extensions to the object inside the package.json
-// "devDependencies": {
-//     "@formkit/auto-animate": "^1.0.0-beta.3"
-//   }
-// const [listRef] = useAutoAnimate<HTMLUListElement>() in Todolist.tsx
-// <ul ref={listRef}>
-//Look how smoothly the tasks are added!
-//P.S. Do you understand why a new task append in all Todolists?
-// [because we only have one state for all our todolists, but we'll talk about that on Tuesday.]
+import { SuperInput } from './SuperInput'
 
 type FilterType = 'all' | 'active' | 'completed' | 'three';
 
@@ -39,7 +28,7 @@ type FetchDataType={
     completed:boolean
 }
 export const Todolist = (props: PropsType) => {
-    //////
+
     const [todosSt, setTodosSt] = useState<FetchDataType[]>([])
     const fetchRequest = () => {
         fetch('https://jsonplaceholder.typicode.com/todos')
@@ -56,14 +45,18 @@ export const Todolist = (props: PropsType) => {
         setTodosSt([])
     }
 
-    // let [inputSt,setInputSt]=useState('')//must use useRef('') for avoid a multi-requesting
-    // console.log(todosSt)
+    const [inputSt,setInputSt]=useState('')//must use useRef('') for avoid a multi-requesting
     // let inpRef=useRef<HTMLInputElement>(null)//must use useRef('') for avoid a multi-requesting
+    const addTodo=()=>{        
+        setTodosSt([{id:todosSt.length+1,title:inputSt,completed:true},...todosSt])
+        // inpRef.current.value='';
+    }
 
-    // const addTodo=()=>{        
-    //     setTodosSt([{id:todosSt.length+1,title:inpRef.current.value,completed:true},...todosSt])
-    //     inpRef.current.value='';
-    // }
+    const addTodoSuper=(v:string)=>{        
+        setInputSt(v)
+        // inpRef.current.value='';
+    }
+
     // const onClickHandlerSuper=(value:string)=>{
     //     // inpRef.current=value;
     // }
@@ -115,14 +108,12 @@ export const Todolist = (props: PropsType) => {
         removeAllTasks()
     }
 
-    //------
     const [inpSt, setInpSt] = useState('');
     const addTask = () => {
         setTasksSt([{ taskId: uuid(), title: inpSt, isDone: false }, ...tasksSt])
         filteredTasks = tasks;
         setInpSt('')
     }
-    //-----    
     return (
         <div>
             <h3>{props.title}</h3>
@@ -130,8 +121,6 @@ export const Todolist = (props: PropsType) => {
             <div>
                 <Input setInpSt={setInpSt} value={inpSt} callback={addTask} />
                 <Button name={'+'} callback={addTask} />
-                {/* <input />
-                <button>+</button> */}
             </div>
             <ul ref={listRef}>
                 {filteredTasks.map(el => {
@@ -161,7 +150,22 @@ export const Todolist = (props: PropsType) => {
             </div>
             ================================begin tasks from fetch========================================
             <div>
-                {todosSt.map(el => <li>{el.title}</li>)}
+                <div>
+                    <SuperInput value={inputSt} callback={addTodoSuper}/>
+                    <Button name={'add todo'}  callback={addTodo}/>
+                </div>
+                <button onClick={showTodos}>show todos</button>
+                <button onClick={hideTodos}>hide todos</button>
+                {todosSt.map(el => {
+                    return (
+                        <li key={el.id}>
+                            <Button name={'x'} callback={() => { onClickHandler(el.id+'') }} />
+                            <input type="checkbox" checked={el.completed} onChange={() => { }} />
+                            <span>{el.title}</span>
+                        </li>
+                    )
+                }
+                )}
             </div>
             ================================end tasks from fetch========================================
         </div>
