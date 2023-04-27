@@ -45,23 +45,14 @@ export const Todolist = (props: PropsType) => {
         setTodosSt([])
     }
 
-    const [inputSt,setInputSt]=useState('')//must use useRef('') for avoid a multi-requesting
-    // let inpRef=useRef<HTMLInputElement>(null)//must use useRef('') for avoid a multi-requesting
+    const [inputSt,setInputSt]=useState('')
     const addTodo=()=>{        
-        setTodosSt([{id:todosSt.length+1,title:inputSt,completed:true},...todosSt])
-        // inpRef.current.value='';
+        setTodosSt([{id:todosSt.length+1,title:inputSt,completed:true},...todosSt])        
     }
 
     const addTodoSuper=(v:string)=>{        
         setInputSt(v)
-        // inpRef.current.value='';
     }
-
-    // const onClickHandlerSuper=(value:string)=>{
-    //     // inpRef.current=value;
-    // }
-    //////
-
 
     const [listRef] = useAutoAnimate<HTMLUListElement>()
     const tasks = [
@@ -114,6 +105,13 @@ export const Todolist = (props: PropsType) => {
         filteredTasks = tasks;
         setInpSt('')
     }
+
+    const onCheckboxClickHandler=(taskId:string,e:React.ChangeEvent<HTMLInputElement>)=>{
+        setTasksSt(tasksSt.map(el=> el.taskId===taskId ? {...el,isDone:!el.isDone} : el))
+    }
+    const onFetchCheckboxClickHandler=(id:number,e:React.ChangeEvent<HTMLInputElement>)=>{
+        setTodosSt(todosSt.map(el=> el.id===id ? {...el,completed:!el.completed} : el))
+    }
     return (
         <div>
             <h3>{props.title}</h3>
@@ -126,9 +124,8 @@ export const Todolist = (props: PropsType) => {
                 {filteredTasks.map(el => {
                     return (
                         <li key={el.taskId}>
-                            {/* <button onClick={() => { onClickHandler(el.taskId) }}>x</button> */}
                             <Button name={'x'} callback={() => { onClickHandler(el.taskId) }} />
-                            <input type="checkbox" checked={el.isDone} onChange={() => { }} />
+                            <input type="checkbox" checked={el.isDone} onChange={(e)=>onCheckboxClickHandler(el.taskId,e)}/>
                             <span>{el.title}</span>
                         </li>
                     )
@@ -160,7 +157,7 @@ export const Todolist = (props: PropsType) => {
                     return (
                         <li key={el.id}>
                             <Button name={'x'} callback={() => { onClickHandler(el.id+'') }} />
-                            <input type="checkbox" checked={el.completed} onChange={() => { }} />
+                            <input type="checkbox" checked={el.completed} onChange={(e)=>onFetchCheckboxClickHandler(el.id,e)} />
                             <span>{el.title}</span>
                         </li>
                     )

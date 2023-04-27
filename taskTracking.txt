@@ -2,13 +2,13 @@
 lesson1 +
 lesson2 +
 lesson3 +
-lesson4
+lesson4 -
 -------- end from lessons------------
 
 
 -------- begin from addLessons----------
 #1 12.04.2023 + superbutton
-#2 14.04.2023 - request to server,json,useEffect,useState,useRef. hide|show tasksList,add task,superInput(setState at props)&superButton(useful).
+#2 14.04.2023 + request to server,json,useEffect,useState,useRef. hide|show tasksList,add task,superInput(setState at props)&superButton(useful).(HOW TO DO A WORKING ONCHANGE+ONKEYDOWN FOR INPUT)
 -------- end from addLessons---------
 
 
