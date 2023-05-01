@@ -1,5 +1,6 @@
 import { v1 } from 'uuid'
 import { useState, ChangeEvent } from 'react';
+// import { SuperInput } from "./SuperInput";
 import { Input } from "./Input";
 import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
@@ -61,12 +62,16 @@ export const Todolist = ({ title, body }: PropsType) => {
 
     const removeAllButtononClickHandler = () => removeAllTasks()
 
-    const [inpSt, setInpSt] = useState('');
+    const [inpSt, setInpSt] = useState<string>('');
+    const [errorSt,setErrorSt] = useState<string>('')
 
     const addTask = () => {
-        setTasksSt([{ taskId: v1(), title: inpSt, isDone: false }, ...tasksSt])
-        filteredTasks = tasks;
-        setInpSt('')
+        if (inpSt.trim() !== '') {
+            setTasksSt([{ taskId: v1(), title: inpSt.trim(), isDone: false }, ...tasksSt])
+            filteredTasks = tasks;
+            setInpSt('')
+        }
+
     }
 
     const onCheckboxClickHandler = (taskId: string, e: boolean) =>
@@ -78,6 +83,7 @@ export const Todolist = ({ title, body }: PropsType) => {
             <p>{body}</p>
             <div>
                 <Input setInpSt={setInpSt} value={inpSt} callback={addTask} />
+                {/* <SuperInput value={inpSt} callback={addTask} /> */}
                 <Button name={'+'} callback={addTask} />
             </div>
             <ul ref={listRef}>
@@ -87,7 +93,7 @@ export const Todolist = ({ title, body }: PropsType) => {
                             <Button name={'x'} callback={() => { onClickHandler(el.taskId) }} />
                             {/* <input type="checkbox" checked={el.isDone} 
                             onChange={(e) => onCheckboxClickHandler(el.taskId, e)} /> */}
-                            <Checkbox isDone={el.isDone} callback={(value) => onCheckboxClickHandler(el.taskId, value)}/>
+                            <Checkbox isDone={el.isDone} callback={(e) => onCheckboxClickHandler(el.taskId, e)} />
                             <span>{el.title}</span>
                         </li>
                     )
