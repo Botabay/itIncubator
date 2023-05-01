@@ -70,19 +70,19 @@ export const Todolist = ({ title, body }: PropsType) => {
     let filteredTasks=filteredTasksCalc()
     const changeFilter = (filter: FilterType) => setFilterSt(filter)
 
-    const removeTask = (taskId: string) =>
+    const removeTask = (taskId: string,todolistId:string) =>
         setTasksSt(tasksSt.filter(el => el.taskId !== taskId))
 
-    const removeAllTasks = () => setTasksSt([])
+    const removeAllTasks = (,todolistId:string) => setTasksSt([])
 
-    const onClickHandler = (taskId: string) => removeTask(taskId)
+    const onClickHandler = (taskId: string,todolistId:string) => removeTask(taskId)
 
-    const removeAllButtononClickHandler = () => removeAllTasks()
+    const removeAllButtononClickHandler = (,todolistId:string) => removeAllTasks()
 
     const [inpSt, setInpSt] = useState<string>('');
     const [errorSt, setErrorSt] = useState<string>('')
 
-    const addTask = () => {
+    const addTask = (,todolistId:string) => {
         if (inpSt.trim() !== '') {
             setTasksSt([{ taskId: v1(), title: inpSt.trim(), isDone: false }, ...tasksSt])
             filteredTasks = tasks;
@@ -93,7 +93,7 @@ export const Todolist = ({ title, body }: PropsType) => {
         }
     }
 
-    const onCheckboxClickHandler = (taskId: string, e: boolean) =>
+    const onCheckboxClickHandler = (taskId: string, e: boolean,todolistId:string) =>
         setTasksSt(tasksSt.map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el))
 
     return (
