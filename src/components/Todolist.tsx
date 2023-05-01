@@ -36,22 +36,17 @@ export const Todolist = ({ title, body }: PropsType) => {
         { taskId: v1(), title: "TS2", isDone: false }
     ];
     const [tasksSt, setTasksSt] = useState(tasks)
-    let filteredTasks = tasksSt;
 
     const [filterSt, setFilterSt] = useState<FilterType>('all')
 
-    if (filterSt === 'active') {
-        filteredTasks = tasksSt.filter(el => !el.isDone)
+    const filteredTasksCalc = () => {
+        switch (filterSt) {
+            case 'active':return tasksSt.filter(el => !el.isDone);
+            case 'completed':return tasksSt.filter(el => el.isDone);
+            default: return tasksSt
+        }
     }
-
-    if (filterSt === 'completed') {
-        filteredTasks = tasksSt.filter(el => el.isDone)
-    }
-
-    if (filterSt === 'three') {
-        filteredTasks = tasksSt.filter((el, ind) => ind < 3)
-    }
-
+    let filteredTasks=filteredTasksCalc()
     const changeFilter = (filter: FilterType) => setFilterSt(filter)
 
     const removeTask = (taskId: string) =>
@@ -64,7 +59,7 @@ export const Todolist = ({ title, body }: PropsType) => {
     const removeAllButtononClickHandler = () => removeAllTasks()
 
     const [inpSt, setInpSt] = useState<string>('');
-    const [errorSt,setErrorSt] = useState<string>('')
+    const [errorSt, setErrorSt] = useState<string>('')
 
     const addTask = () => {
         if (inpSt.trim() !== '') {
@@ -85,11 +80,11 @@ export const Todolist = ({ title, body }: PropsType) => {
             <h3>{title}</h3>
             <p>{body}</p>
             <div>
-                <Input setInpSt={setInpSt} value={inpSt} callback={addTask} className={(errorSt && s.error)+''}/>
+                <Input setInpSt={setInpSt} value={inpSt} callback={addTask} className={(errorSt && s.error) + ''} />
                 {/* <SuperInput value={inpSt} callback={addTask} /> */}
-                <Button className={''}  name={'+'} callback={addTask} />
+                <Button className={''} name={'+'} callback={addTask} />
             </div>
-            {errorSt &&<div className={s.errorMessage}>{errorSt}</div>}
+            {errorSt && <div className={s.errorMessage}>{errorSt}</div>}
             <ul ref={listRef}>
                 {filteredTasks.map(el => {
                     return (
@@ -104,10 +99,10 @@ export const Todolist = ({ title, body }: PropsType) => {
                 })}
             </ul>
             <div>
-                <Button className={(filterSt==='all'&& s.filter)+''} name={'All'} callback={() => { changeFilter('all') }} />
-                <Button className={(filterSt==='active'&& s.filter)+''} name={'Active'} callback={() => { changeFilter('active') }} />
-                <Button className={(filterSt==='completed'&& s.filter)+''} name={'Completed'} callback={() => { changeFilter('completed') }} />
-                <Button className={(filterSt==='three' && s.filter)+''} name={'Three'} callback={() => { changeFilter('three') }} />
+                <Button className={(filterSt === 'all' && s.filter) + ''} name={'All'} callback={() => { changeFilter('all') }} />
+                <Button className={(filterSt === 'active' && s.filter) + ''} name={'Active'} callback={() => { changeFilter('active') }} />
+                <Button className={(filterSt === 'completed' && s.filter) + ''} name={'Completed'} callback={() => { changeFilter('completed') }} />
+                <Button className={(filterSt === 'three' && s.filter) + ''} name={'Three'} callback={() => { changeFilter('three') }} />
             </div>
             <div>
                 <button onClick={removeAllButtononClickHandler}>remove all tasks</button>
