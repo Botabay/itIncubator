@@ -1,4 +1,112 @@
-import { v4 as uuid } from 'uuid'
+import { v1 } from 'uuid'
+import { useState } from 'react';
+import { Input } from "./Input";
+import { Button } from './Button'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
+type FilterType = 'all' | 'active' | 'completed' | 'three';
+
+type PropsType = {
+    title: string
+    body?: string
+}
+
+export type DataType = {
+    title: string
+    tasks: TasksType[]
+    students: string[]
+}
+type TasksType = {
+    taskId: string
+    title: string
+    isDone: boolean
+}
+export const Todolist = ({title,body}: PropsType) => {
+
+    const [listRef] = useAutoAnimate<HTMLUListElement>()
+    const tasks = [
+        { taskId: v1(), title: "HTML&CSS1", isDone: true },
+        { taskId: v1(), title: "JS1", isDone: true },
+        { taskId: v1(), title: "TS1", isDone: false },
+        { taskId: v1(), title: "HTML&CSS2", isDone: true },
+        { taskId: v1(), title: "JS2", isDone: true },
+        { taskId: v1(), title: "TS2", isDone: false }
+    ];
+    const [tasksSt, setTasksSt] = useState(tasks)
+    let filteredTasks = tasksSt;
+
+    const [filterSt, setFilterSt] = useState<FilterType>('all')
+
+    if (filterSt === 'active') {
+        filteredTasks = tasksSt.filter(el => !el.isDone)
+    }
+
+    if (filterSt === 'completed') {
+        filteredTasks = tasksSt.filter(el => el.isDone)
+    }
+
+    if (filterSt === 'three') {
+        filteredTasks = tasksSt.filter((el, ind) => ind < 3)
+    }
+
+    const changeFilter = (filter: FilterType) => setFilterSt(filter)
+
+    const removeTask = (taskId: string) => 
+        setTasksSt(tasksSt.filter(el => el.taskId !== taskId))
+
+    const removeAllTasks = () => setTasksSt([])
+
+    const onClickHandler = (taskId: string) => removeTask(taskId)    
+
+    const removeAllButtononClickHandler = () => removeAllTasks()
+
+    const [inpSt, setInpSt] = useState('');
+
+    const addTask = () => {
+        setTasksSt([{ taskId: v1(), title: inpSt, isDone: false }, ...tasksSt])
+        filteredTasks = tasks;
+        setInpSt('')
+    }
+
+    const onCheckboxClickHandler = (taskId: string, e: React.ChangeEvent<HTMLInputElement>) => 
+        setTasksSt(tasksSt.map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el))
+    
+    return (
+        <div>
+            <h3>{title}</h3>
+            <p>{body}</p>
+            <div>
+                <Input setInpSt={setInpSt} value={inpSt} callback={addTask} />
+                <Button name={'+'} callback={addTask} />
+            </div>
+            <ul ref={listRef}>
+                {filteredTasks.map(el => {
+                    return (
+                        <li key={el.taskId}>
+                            <Button name={'x'} callback={() => { onClickHandler(el.taskId) }} />
+                            <input type="checkbox" checked={el.isDone} onChange={(e) => onCheckboxClickHandler(el.taskId, e)} />
+                            <span>{el.title}</span>
+                        </li>
+                    )
+                })}
+            </ul>
+            <div>
+                <Button name={'All'} callback={() => { changeFilter('all') }} />
+                <Button name={'Active'} callback={() => { changeFilter('active') }} />
+                <Button name={'Completed'} callback={() => { changeFilter('completed') }} />
+                <Button name={'Three'} callback={() => { changeFilter('three') }} />
+            </div>
+            <div>
+                <button onClick={removeAllButtononClickHandler}>remove all tasks</button>
+            </div>
+        </div>
+    )
+}
+
+
+/**
+ * 01.05.2023
+ * import { v4 as uuid } from 'uuid'
 import { useState, useEffect } from 'react';
 import { Input } from "./Input";
 import { Button } from './Button'
@@ -137,37 +245,35 @@ export const Todolist = (props: PropsType) => {
                 <Button name={'Active'} callback={() => { changeFilter('active') }} />
                 <Button name={'Completed'} callback={() => { changeFilter('completed') }} />
                 <Button name={'Three'} callback={() => { changeFilter('three') }} />
-                {/* <button onClick={() => { changeFilter('all') }}>All</button>
-                <button onClick={() => { changeFilter('active') }}>Active</button>
-                <button onClick={() => { changeFilter('completed') }}>Completed</button>
-                <button onClick={() => { changeFilter('three') }}>Three</button> */}
-            </div>
-            <div>
-                <button onClick={removeAllButtononClickHandler}>remove all tasks</button>
-            </div>
-            ================================begin tasks from fetch========================================
-            <div>
-                <div>
-                    <SuperInput value={inputSt} callback={addTodoSuper}/>
-                    <Button name={'add todo'}  callback={addTodo}/>
                 </div>
-                <button onClick={showTodos}>show todos</button>
-                <button onClick={hideTodos}>hide todos</button>
-                {todosSt.map(el => {
-                    return (
-                        <li key={el.id}>
-                            <Button name={'x'} callback={() => { onClickHandler(el.id+'') }} />
-                            <input type="checkbox" checked={el.completed} onChange={(e)=>onFetchCheckboxClickHandler(el.id,e)} />
-                            <span>{el.title}</span>
-                        </li>
-                    )
-                }
-                )}
+                <div>
+                    <button onClick={removeAllButtononClickHandler}>remove all tasks</button>
+                </div>
+                ================================begin tasks from fetch========================================
+                <div>
+                    <div>
+                        <SuperInput value={inputSt} callback={addTodoSuper}/>
+                        <Button name={'add todo'}  callback={addTodo}/>
+                    </div>
+                    <button onClick={showTodos}>show todos</button>
+                    <button onClick={hideTodos}>hide todos</button>
+                    {todosSt.map(el => {
+                        return (
+                            <li key={el.id}>
+                                <Button name={'x'} callback={() => { onClickHandler(el.id+'') }} />
+                                <input type="checkbox" checked={el.completed} onChange={(e)=>onFetchCheckboxClickHandler(el.id,e)} />
+                                <span>{el.title}</span>
+                            </li>
+                        )
+                    }
+                    )}
+                </div>
+                ================================end tasks from fetch========================================
             </div>
-            ================================end tasks from fetch========================================
-        </div>
-    )
-}
+        )
+    }
+ */
+
 
 /**
  * export const Todolist = (props: PropsType) => {

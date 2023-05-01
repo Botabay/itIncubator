@@ -1,30 +1,37 @@
 -------- begin from lessons----------
-lesson1 +
-lesson2 +
-lesson3 +
-lesson4 -
+week 1 +
+week 2 +
+week 3 +
+------week 4 17_04_2023 - checkboxHandler,trim,error, styleOfError for input, setFilter.  hardTask(props) of Igor(i failed this).
+--week 5 25_04_2023 - refactoring for a assotianed array state
 -------- end from lessons------------
 
 
 -------- begin from addLessons----------
 #1 12.04.2023 + superbutton
 #2 14.04.2023 + request to server,json,useEffect,useState,useRef. hide|show tasksList,add task,superInput(setState at props)&superButton(useful).(HOW TO DO A WORKING ONCHANGE+ONKEYDOWN FOR INPUT)
+#3 26.04.2023 - 
+-#4 28.04.2023 - routing
 -------- end from addLessons---------
 
 
 -------- begin from notRequiredMicroAdds----------
-lesson1 +
-lesson2 +
-lesson3 + не смог запустить useAutoAnimate, how to type the useRef() initialValue????????????
-lesson4
+week 1 +
+week 2 +
+week 3 + how to type the useRef() initialValue????????????
+----week 4 - to wrap the filter-actions, apply a switch to filter
+week 5 does not exist
+week 6 does not exist
 -------- end from notRequiredMicroAdds---------
 
 
 -------- begin from microtasks----------
-lesson1 +
-lesson2 + made varint2(it's non-uniButton)
-lesson3 does not exist
-lesson4 does not exist
+week 1 +
+week 2 + made varint2(it's non-uniButton)
+week 3 does not exist
+week 4 does not exist
+week 5 - like lesson5
+week 6 does not exist
 -------- end from microtasks---------
 
 
@@ -33,24 +40,54 @@ lesson4 does not exist
 -----------------------------------------------------------------------------------------------------
 
 -------- begin from autoCheckHomework----------
-lesson1 
-lesson2 
-lesson3
-lesson4
+week 1 
+week 2 
+week 3
+week 4
 -------- end from autoCheckHomework---------
 
 
 -------- begin from samur_kabzda----------
-lesson1 
-lesson2 
-lesson3
-lesson4
+week 1 
+week 2 
+week 3
+week 4
 -------- end from samur_kabzda---------
 
 
 -------- begin from lessonsVideoByDimych----------
-lesson1 
-lesson2 
-lesson3
-lesson4
+week 1 
+week 2 
+week 3
+week 4
 -------- end from lessonsVideoByDimych---------
+
+
+
+для addLessons4
+export const dataState: DataStateType = {
+    pages:
+        [
+            {
+                heading: "Цикл while",
+                about: " Цикл while имеет следующий синтаксис: ",
+            },
+            {
+                heading: "Цикл for",
+                about: " Цикл for имеет следующий синтаксис: ",
+            },
+            {
+                heading: "Конструкция \"switch\"",
+                about: " Конструкция switch заменяет собой сразу несколько if.",
+            },
+        ],
+}
+
+export type DataStateType = {
+    pages: Array<PagesType>
+}
+
+export type PagesType = {
+    heading: string
+    about: string
+}

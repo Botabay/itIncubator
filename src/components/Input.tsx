@@ -1,23 +1,22 @@
 import { KeyboardEvent, ChangeEvent } from "react";
-type PropsType={
-    setInpSt:React.Dispatch<React.SetStateAction<string>>
-    value:string
-    callback:()=>void
+type PropsType = {
+    setInpSt: React.Dispatch<React.SetStateAction<string>>
+    value: string
+    callback: () => void
 }
-export const Input=(props:PropsType)=>{
-    
-    const onChangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
-        props.setInpSt(e.currentTarget.value);    
-    }
-    const onKeyDownHandler=(e:KeyboardEvent<HTMLInputElement>)=>{
-        if (e.key==="Enter"){
-            props.callback();
-        }
-    }
-    return(
-        <input type="text" 
+export const Input = ({
+                        setInpSt,
+                        value,
+                        callback
+                     }: PropsType) => {
+    const onChangeHandler = 
+        (e: ChangeEvent<HTMLInputElement>) => setInpSt(e.currentTarget.value)
+    const onKeyDownHandler = 
+        (e: KeyboardEvent<HTMLInputElement>) => (e.key === "Enter") && callback()
+    return (
+        <input type="text"
             onChange={onChangeHandler}
-            value={props.value}
+            value={value}
             onKeyDown={onKeyDownHandler}
         />
     )

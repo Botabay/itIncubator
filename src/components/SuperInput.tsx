@@ -10,8 +10,11 @@ export const SuperInput=(props:PropsType)=>{
     
     // const onKeyDownHandler=(e:KeyboardEvent<HTMLInputElement>)=>{
     //     if (e.key==="Enter"){
-    //         props.callback()
+    //         console.log(e.currentTarget.value);
+            
+    //         props.callback(e.currentTarget.value)
     //     }
+        
     // }
     return(
         <input type="text" 
