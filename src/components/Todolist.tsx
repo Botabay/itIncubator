@@ -37,17 +37,28 @@ type TasksType ={
 export const Todolist = ({ title, body }: PropsType) => {
 
     const [listRef] = useAutoAnimate<HTMLUListElement>()
-    // const tasks = [
-    //     { taskId: v1(), title: "HTML&CSS1", isDone: true },
-    //     { taskId: v1(), title: "JS1", isDone: true },
-    //     { taskId: v1(), title: "TS1", isDone: false },
-    //     { taskId: v1(), title: "HTML&CSS2", isDone: true },
-    //     { taskId: v1(), title: "JS2", isDone: true },
-    //     { taskId: v1(), title: "TS2", isDone: false }
-    // ];
-    // const [tasksSt, setTasksSt] = useState(tasks)
-
-    const [filterSt, setFilterSt] = useState<FilterType>('all')
+    let todolistId_1=v1();
+    let todolistId_2=v1();
+    const todolists=[
+        {id:todolistId_1,title:'what to learn',filter:'all'},
+        {id:todolistId_2,title:'what to read',filter:'all'}
+    ]
+    const tasks={
+        [todolistId_1]:[
+            { taskId: v1(), title: "HTML", isDone: true },
+            { taskId: v1(), title: "CSS", isDone: true },
+            { taskId: v1(), title: "js", isDone: true },
+        ],
+        [todolistId_2]:[
+            { taskId: v1(), title: "php", isDone: true },
+            { taskId: v1(), title: "mongoDB", isDone: true },
+            { taskId: v1(), title: "express", isDone: true },
+        ]
+    }
+    const [todolistsSt, setTodolistsSt] = useState<TodolistType[]>(todolists)
+    const [tasksSt, setTasksSt] = useState<TaskType[]>(tasks
+        )
+    // const [filterSt, setFilterSt] = useState<FilterType>('all')
 
     const filteredTasksCalc = () => {
         switch (filterSt) {
