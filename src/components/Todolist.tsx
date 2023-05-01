@@ -14,28 +14,38 @@ type PropsType = {
     body?: string
 }
 
-export type DataType = {
+export type DataType = {//DataType is required for Tasks.tsx kind of a microtask
     title: string
     tasks: TasksType[]
     students: string[]
 }
-type TasksType = {
+type TodolistType={
+    id:string
+    title:string
+    filter:string
+}
+type TodolistsType =TodolistType[]
+type TaskType = {
     taskId: string
     title: string
     isDone: boolean
 }
+type TasksType ={
+    [key:string]:TaskType[]
+}
+
 export const Todolist = ({ title, body }: PropsType) => {
 
     const [listRef] = useAutoAnimate<HTMLUListElement>()
-    const tasks = [
-        { taskId: v1(), title: "HTML&CSS1", isDone: true },
-        { taskId: v1(), title: "JS1", isDone: true },
-        { taskId: v1(), title: "TS1", isDone: false },
-        { taskId: v1(), title: "HTML&CSS2", isDone: true },
-        { taskId: v1(), title: "JS2", isDone: true },
-        { taskId: v1(), title: "TS2", isDone: false }
-    ];
-    const [tasksSt, setTasksSt] = useState(tasks)
+    // const tasks = [
+    //     { taskId: v1(), title: "HTML&CSS1", isDone: true },
+    //     { taskId: v1(), title: "JS1", isDone: true },
+    //     { taskId: v1(), title: "TS1", isDone: false },
+    //     { taskId: v1(), title: "HTML&CSS2", isDone: true },
+    //     { taskId: v1(), title: "JS2", isDone: true },
+    //     { taskId: v1(), title: "TS2", isDone: false }
+    // ];
+    // const [tasksSt, setTasksSt] = useState(tasks)
 
     const [filterSt, setFilterSt] = useState<FilterType>('all')
 

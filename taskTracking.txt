@@ -5,7 +5,7 @@ week 3 +
 week 4 17_04_2023 + checkboxHandler,trim+,error, styleOfError for input, 
                     setFilter(для покраски кнопок 'all','completed',...).
                     hardTask(props) of Igor(i failed this).
---week 5 25_04_2023 - refactoring for a assotianed array state
+----week 5 25_04_2023 - refactoring for a assotianed array state
 -------- end from lessons------------
 
 
@@ -13,7 +13,7 @@ week 4 17_04_2023 + checkboxHandler,trim+,error, styleOfError for input,
 #1 12.04.2023 + superbutton
 #2 14.04.2023 + request to server,json,useEffect,useState,useRef. hide|show tasksList,add task,superInput(setState at props)&superButton(useful).(HOW TO DO A WORKING ONCHANGE+ONKEYDOWN FOR INPUT)
 #3 26.04.2023 - 
--#4 28.04.2023 - routing
+--#4 28.04.2023 - routing
 -------- end from addLessons---------
 
 
@@ -21,7 +21,7 @@ week 4 17_04_2023 + checkboxHandler,trim+,error, styleOfError for input,
 week 1 +
 week 2 +
 week 3 + how to type the useRef() initialValue????????????
-----week 4 - to wrap the filter-actions, apply a switch to filter
+week 4 + to wrap the filter-actions, apply a switch to filter
 week 5 does not exist
 week 6 does not exist
 -------- end from notRequiredMicroAdds---------
