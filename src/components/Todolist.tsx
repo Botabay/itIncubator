@@ -1,8 +1,9 @@
 import { v1 } from 'uuid'
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { Input } from "./Input";
 import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { Checkbox } from "./Checkbox";
 
 type FilterType = 'all' | 'active' | 'completed' | 'three';
 
@@ -21,7 +22,7 @@ type TasksType = {
     title: string
     isDone: boolean
 }
-export const Todolist = ({title,body}: PropsType) => {
+export const Todolist = ({ title, body }: PropsType) => {
 
     const [listRef] = useAutoAnimate<HTMLUListElement>()
     const tasks = [
@@ -51,12 +52,12 @@ export const Todolist = ({title,body}: PropsType) => {
 
     const changeFilter = (filter: FilterType) => setFilterSt(filter)
 
-    const removeTask = (taskId: string) => 
+    const removeTask = (taskId: string) =>
         setTasksSt(tasksSt.filter(el => el.taskId !== taskId))
 
     const removeAllTasks = () => setTasksSt([])
 
-    const onClickHandler = (taskId: string) => removeTask(taskId)    
+    const onClickHandler = (taskId: string) => removeTask(taskId)
 
     const removeAllButtononClickHandler = () => removeAllTasks()
 
@@ -68,9 +69,9 @@ export const Todolist = ({title,body}: PropsType) => {
         setInpSt('')
     }
 
-    const onCheckboxClickHandler = (taskId: string, e: React.ChangeEvent<HTMLInputElement>) => 
+    const onCheckboxClickHandler = (taskId: string, e: boolean) =>
         setTasksSt(tasksSt.map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el))
-    
+
     return (
         <div>
             <h3>{title}</h3>
@@ -84,7 +85,9 @@ export const Todolist = ({title,body}: PropsType) => {
                     return (
                         <li key={el.taskId}>
                             <Button name={'x'} callback={() => { onClickHandler(el.taskId) }} />
-                            <input type="checkbox" checked={el.isDone} onChange={(e) => onCheckboxClickHandler(el.taskId, e)} />
+                            {/* <input type="checkbox" checked={el.isDone} 
+                            onChange={(e) => onCheckboxClickHandler(el.taskId, e)} /> */}
+                            <Checkbox isDone={el.isDone} callback={(value) => onCheckboxClickHandler(el.taskId, value)}/>
                             <span>{el.title}</span>
                         </li>
                     )
