@@ -3,11 +3,13 @@ type PropsType = {
     setInpSt: React.Dispatch<React.SetStateAction<string>>
     value: string
     callback: () => void
+    className:string
 }
 export const Input = ({
                         setInpSt,
                         value,
-                        callback
+                        callback,
+                        className
                      }: PropsType) => {
     const onChangeHandler = 
         (e: ChangeEvent<HTMLInputElement>) => setInpSt(e.currentTarget.value)
@@ -17,6 +19,7 @@ export const Input = ({
         <input type="text"
             onChange={onChangeHandler}
             value={value}
+            className={className}
             onKeyDown={onKeyDownHandler}
         />
     )

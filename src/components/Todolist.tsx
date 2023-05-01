@@ -5,6 +5,7 @@ import { Input } from "./Input";
 import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Checkbox } from "./Checkbox";
+import s from './Todolist.module.css'
 
 type FilterType = 'all' | 'active' | 'completed' | 'three';
 
@@ -69,9 +70,11 @@ export const Todolist = ({ title, body }: PropsType) => {
         if (inpSt.trim() !== '') {
             setTasksSt([{ taskId: v1(), title: inpSt.trim(), isDone: false }, ...tasksSt])
             filteredTasks = tasks;
-            setInpSt('')
+            setInpSt('');
+            setErrorSt('')
+        } else {
+            setErrorSt('empty string')
         }
-
     }
 
     const onCheckboxClickHandler = (taskId: string, e: boolean) =>
@@ -82,15 +85,16 @@ export const Todolist = ({ title, body }: PropsType) => {
             <h3>{title}</h3>
             <p>{body}</p>
             <div>
-                <Input setInpSt={setInpSt} value={inpSt} callback={addTask} />
+                <Input setInpSt={setInpSt} value={inpSt} callback={addTask} className={(errorSt && s.error)+''}/>
                 {/* <SuperInput value={inpSt} callback={addTask} /> */}
-                <Button name={'+'} callback={addTask} />
+                <Button className={''}  name={'+'} callback={addTask} />
             </div>
+            {errorSt &&<div className={s.errorMessage}>{errorSt}</div>}
             <ul ref={listRef}>
                 {filteredTasks.map(el => {
                     return (
                         <li key={el.taskId}>
-                            <Button name={'x'} callback={() => { onClickHandler(el.taskId) }} />
+                            <Button className={''} name={'x'} callback={() => { onClickHandler(el.taskId) }} />
                             {/* <input type="checkbox" checked={el.isDone} 
                             onChange={(e) => onCheckboxClickHandler(el.taskId, e)} /> */}
                             <Checkbox isDone={el.isDone} callback={(e) => onCheckboxClickHandler(el.taskId, e)} />
@@ -100,10 +104,10 @@ export const Todolist = ({ title, body }: PropsType) => {
                 })}
             </ul>
             <div>
-                <Button name={'All'} callback={() => { changeFilter('all') }} />
-                <Button name={'Active'} callback={() => { changeFilter('active') }} />
-                <Button name={'Completed'} callback={() => { changeFilter('completed') }} />
-                <Button name={'Three'} callback={() => { changeFilter('three') }} />
+                <Button className={(filterSt==='all'&& s.filter)+''} name={'All'} callback={() => { changeFilter('all') }} />
+                <Button className={(filterSt==='active'&& s.filter)+''} name={'Active'} callback={() => { changeFilter('active') }} />
+                <Button className={(filterSt==='completed'&& s.filter)+''} name={'Completed'} callback={() => { changeFilter('completed') }} />
+                <Button className={(filterSt==='three' && s.filter)+''} name={'Three'} callback={() => { changeFilter('three') }} />
             </div>
             <div>
                 <button onClick={removeAllButtononClickHandler}>remove all tasks</button>

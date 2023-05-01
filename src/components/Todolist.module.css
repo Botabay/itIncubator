@@ -1,0 +1,11 @@
+.error {
+    outline: 10px solid red;
+}
+
+.errorMessage {
+    color:red
+}
+
+.filter {
+    background: blue;
+}

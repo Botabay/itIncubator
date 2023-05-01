@@ -2,9 +2,9 @@
 week 1 +
 week 2 +
 week 3 +
-------week 4 17_04_2023 - checkboxHandler+,trim+,error, styleOfError for input, 
-                            setFilter(для покраски кнопок 'all','completed',...).
-                            hardTask(props) of Igor(i failed this).
+week 4 17_04_2023 + checkboxHandler,trim+,error, styleOfError for input, 
+                    setFilter(для покраски кнопок 'all','completed',...).
+                    hardTask(props) of Igor(i failed this).
 --week 5 25_04_2023 - refactoring for a assotianed array state
 -------- end from lessons------------
 
