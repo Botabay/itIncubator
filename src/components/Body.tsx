@@ -29,32 +29,41 @@ export const Body = () => {
   const tasks = {
     [todolistId_1]: [
       { taskId: v1(), title: "HTML", isDone: true },
-      { taskId: v1(), title: "CSS", isDone: true },
+      { taskId: v1(), title: "CSS", isDone: false },
       { taskId: v1(), title: "js", isDone: true },
     ],
     [todolistId_2]: [
       { taskId: v1(), title: "php", isDone: true },
       { taskId: v1(), title: "mongoDB", isDone: true },
-      { taskId: v1(), title: "express", isDone: true },
+      { taskId: v1(), title: "express", isDone: false },
     ]
   }
   const [todolistsSt, setTodolistsSt] = useState<TodolistType[]>(todolists)
   const [tasksSt, setTasksSt] = useState<TasksType>(tasks)
+  let filteredTasks;
 
   const removeTask = (taskId: string, todolistId: string) =>
-    setTasksSt({ ...tasksSt, [todolistId]: tasksSt[todolistId].filter(el => el.taskId !== taskId) })
+    setTasksSt({ ...tasksSt, [todolistId]: 
+      tasksSt[todolistId].filter(el => el.taskId !== taskId) })
 
-  const addTask = (value: string, todolistId: string) =>
-    setTasksSt({ ...tasksSt, [todolistId]: [{taskId:v1(),title:value,isDone:false},...tasksSt[todolistId]] })
+  const addTask = (value: string, todolistId: string) =>{
+    setTasksSt({ ...tasksSt, [todolistId]: 
+      [{taskId:v1(),title:value,isDone:false},...tasksSt[todolistId]] });
+    filteredTasks = tasksSt[todolistId];
+  }
 
   const removeAllTasks = (todolistId: string) =>
     setTasksSt({ ...tasksSt, [todolistId]: [] })
 
-  const removeTodolist=(todolistId: string)=>setTodolistsSt(todolistsSt.filter(el=>el.todolistId!==todolistId))
-
+  const removeTodolist=(todolistId: string)=>{
+    setTodolistsSt(todolistsSt.filter(el=>el.todolistId!==todolistId));
+    const copy = {...tasks}
+    delete copy[todolistId]
+    setTasksSt(copy)
+  }
   const changeTodolistFilter = (filter: FilterType, todolistId: string) =>
-    // setTodolistsSt(todolists.map(el=>el.todolistId===todolistId?{...el,filter:filter}:el))
-    setTodolistsSt(todolists.filter(el=>el.filter===filter))
+    setTodolistsSt(todolists.map(el=>el.todolistId===todolistId?{...el,filter:filter}:el))
+    // setTodolistsSt(todolists.filter(el=>el.filter===filter))
 
 
   // const addTask = (todolistId: string) => {
@@ -69,25 +78,27 @@ export const Body = () => {
   // }
 
   const changeTaskStatus = (taskId: string, e: boolean, todolistId: string) => 
-     setTasksSt({...tasksSt,[todolistId]:tasksSt[todolistId].map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el)} )
+    setTasksSt({...tasksSt,[todolistId]:tasksSt[todolistId]
+      .map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el)} )
   
-  
+    const filteredTasksCalc = (tasks:TaskType[],filter:FilterType) => {
+      switch (filter) {
+        case 'active': return tasks.filter(el => !el.isDone);
+        case 'completed': return tasks.filter(el => el.isDone);
+        default: return tasks
+      }
+    }
 
   return (
         <div>
       {todolistsSt.map(el => {
-        const filteredTasksCalc = (filter:FilterType, todolistId: string) => {
-          switch (filter) {
-            case 'active': return tasksSt[todolistId].filter(el => !el.isDone);
-            case 'completed': return tasksSt[todolistId].filter(el => el.isDone);
-            default: return tasksSt[todolistId]
-          }
-        }
-        let filteredTasks = filteredTasksCalc(el.filter, el.todolistId)
+        
+        filteredTasks = filteredTasksCalc(tasksSt[el.todolistId],el.filter)
+
         return (
           <Todolist
             todolistId={el.todolistId}
-            title={'s'}
+            title={el.title}
             filter={el.filter}            
             filteredTasks={filteredTasks}
 
