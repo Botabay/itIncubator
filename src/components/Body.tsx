@@ -50,11 +50,11 @@ export const Body = () => {
   const removeAllTasks = (todolistId: string) =>
     setTasksSt({ ...tasksSt, [todolistId]: [] })
 
-  ///const removeTodolist
-  // const [filterSt, setFilterSt] = useState<FilterType>('all')
+  const removeTodolist=(todolistId: string)=>setTodolistsSt(todolistsSt.filter(el=>el.todolistId!==todolistId))
 
   const changeTodolistFilter = (filter: FilterType, todolistId: string) =>
-    setTodolistsSt(todolists.map(el=>el.todolistId===todolistId?{...el,filter:filter}:el))
+    // setTodolistsSt(todolists.map(el=>el.todolistId===todolistId?{...el,filter:filter}:el))
+    setTodolistsSt(todolists.filter(el=>el.filter===filter))
 
 
   // const addTask = (todolistId: string) => {
@@ -68,7 +68,7 @@ export const Body = () => {
     // }
   // }
 
-  const onCheckboxClickHandler = (taskId: string, e: boolean, todolistId: string) => 
+  const changeTaskStatus = (taskId: string, e: boolean, todolistId: string) => 
      setTasksSt({...tasksSt,[todolistId]:tasksSt[todolistId].map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el)} )
   
   
@@ -94,8 +94,10 @@ export const Body = () => {
             removeTask={removeTask}
             removeAllTasks={removeAllTasks}
             addTask={addTask}
+            changeTaskStatus={changeTaskStatus}
+
             changeTodolistFilter={changeTodolistFilter}
-            onCheckboxClickHandler={onCheckboxClickHandler}
+            removeTodolist={removeTodolist}
           />
         )
       })}
