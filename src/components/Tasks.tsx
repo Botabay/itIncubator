@@ -1,5 +1,4 @@
-import { v4 as uuid } from 'uuid';
-import { DataType } from "./Todolist";
+import { v1 } from 'uuid';
 import { NewComponent } from './NewComponent'
 //notRequiredMicroAdds #1
 // Hi Guys!
@@ -7,12 +6,22 @@ import { NewComponent } from './NewComponent'
 // -You have 2 arrays. You should create a new component TASKS, where you will render these arrays.
 // -Don't forget to assign types to our data.  
 
+type TaskType={
+  taskId:string
+  title:string
+  isDone:boolean
+}
+type DataType={
+  title:string
+  tasks:TaskType[]
+  students:string[]
+}
 export const Tasks = () => {
   const data1: DataType = {
     title: "What to do",
     tasks: [
-      { taskId: uuid(), title: "HTML&CSS2", isDone: true },
-      { taskId: uuid(), title: "JS2", isDone: true }
+      { taskId: v1(), title: "HTML&CSS2", isDone: true },
+      { taskId: v1(), title: "JS2", isDone: true }
     ],
     students: [
       'Jago Wormald1',
@@ -65,8 +74,8 @@ export const Tasks = () => {
   const data2 = {
     title: "What to learn",
     tasks: [
-      { taskId: uuid(), title: "HTML&CSS", isDone: true },
-      { taskId: uuid(), title: "JS", isDone: true }
+      { taskId: v1(), title: "HTML&CSS", isDone: true },
+      { taskId: v1(), title: "JS", isDone: true }
     ],
     students: [
       'Rick Kane',

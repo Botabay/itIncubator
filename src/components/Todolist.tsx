@@ -1,135 +1,63 @@
-import { v1 } from 'uuid'
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 // import { SuperInput } from "./SuperInput";
 import { Input } from "./Input";
 import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Checkbox } from "./Checkbox";
 import s from './Todolist.module.css'
-
-type FilterType = 'all' | 'active' | 'completed' | 'three';
+import { TaskType, FilterType } from './Body'
 
 type PropsType = {
+    todolistId:string
     title: string
-    body?: string
+    filter: FilterType
+    filteredTasks: TaskType[]
+
+    changeTodolistFilter:(filter: FilterType, todolistId: string)=>void
 }
 
-export type DataType = {//DataType is required for Tasks.tsx kind of a microtask
-    title: string
-    tasks: TasksType[]
-    students: string[]
-}
-type TodolistType={
-    id:string
-    title:string
-    filter:string
-}
-type TodolistsType =TodolistType[]
-type TaskType = {
-    taskId: string
-    title: string
-    isDone: boolean
-}
-type TasksType ={
-    [key:string]:TaskType[]
-}
 
-export const Todolist = ({ title, body }: PropsType) => {
-
+export const Todolist = ({ 
+    todolistId,
+    title,
+    filter,
+    filteredTasks,
+    changeTodolistFilter
+}: PropsType) => {
     const [listRef] = useAutoAnimate<HTMLUListElement>()
-    let todolistId_1=v1();
-    let todolistId_2=v1();
-    const todolists=[
-        {id:todolistId_1,title:'what to learn',filter:'all'},
-        {id:todolistId_2,title:'what to read',filter:'all'}
-    ]
-    const tasks={
-        [todolistId_1]:[
-            { taskId: v1(), title: "HTML", isDone: true },
-            { taskId: v1(), title: "CSS", isDone: true },
-            { taskId: v1(), title: "js", isDone: true },
-        ],
-        [todolistId_2]:[
-            { taskId: v1(), title: "php", isDone: true },
-            { taskId: v1(), title: "mongoDB", isDone: true },
-            { taskId: v1(), title: "express", isDone: true },
-        ]
-    }
-    const [todolistsSt, setTodolistsSt] = useState<TodolistType[]>(todolists)
-    const [tasksSt, setTasksSt] = useState<TaskType[]>(tasks
-        )
-    // const [filterSt, setFilterSt] = useState<FilterType>('all')
-
-    const filteredTasksCalc = () => {
-        switch (filterSt) {
-            case 'active':return tasksSt.filter(el => !el.isDone);
-            case 'completed':return tasksSt.filter(el => el.isDone);
-            default: return tasksSt
-        }
-    }
-    let filteredTasks=filteredTasksCalc()
-    const changeFilter = (filter: FilterType) => setFilterSt(filter)
-
-    const removeTask = (taskId: string,todolistId:string) =>
-        setTasksSt(tasksSt.filter(el => el.taskId !== taskId))
-
-    const removeAllTasks = (,todolistId:string) => setTasksSt([])
-
-    const onClickHandler = (taskId: string,todolistId:string) => removeTask(taskId)
-
-    const removeAllButtononClickHandler = (,todolistId:string) => removeAllTasks()
-
     const [inpSt, setInpSt] = useState<string>('');
-    const [errorSt, setErrorSt] = useState<string>('')
-
-    const addTask = (,todolistId:string) => {
-        if (inpSt.trim() !== '') {
-            setTasksSt([{ taskId: v1(), title: inpSt.trim(), isDone: false }, ...tasksSt])
-            filteredTasks = tasks;
-            setInpSt('');
-            setErrorSt('')
-        } else {
-            setErrorSt('empty string')
-        }
-    }
-
-    const onCheckboxClickHandler = (taskId: string, e: boolean,todolistId:string) =>
-        setTasksSt(tasksSt.map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el))
-
-    return (
+  const [errorSt, setErrorSt] = useState<string>('')
+return (
+    <div>
+        <h3>{title}</h3>
         <div>
-            <h3>{title}</h3>
-            <p>{body}</p>
-            <div>
-                <Input setInpSt={setInpSt} value={inpSt} callback={addTask} className={(errorSt && s.error) + ''} />
-                {/* <SuperInput value={inpSt} callback={addTask} /> */}
-                <Button className={''} name={'+'} callback={addTask} />
-            </div>
-            {errorSt && <div className={s.errorMessage}>{errorSt}</div>}
-            <ul ref={listRef}>
-                {filteredTasks.map(el => {
-                    return (
-                        <li key={el.taskId}>
-                            <Button className={''} name={'x'} callback={() => { onClickHandler(el.taskId) }} />
-                            {/* <input type="checkbox" checked={el.isDone} 
-                            onChange={(e) => onCheckboxClickHandler(el.taskId, e)} /> */}
-                            <Checkbox isDone={el.isDone} callback={(e) => onCheckboxClickHandler(el.taskId, e)} />
-                            <span>{el.title}</span>
-                        </li>
-                    )
-                })}
-            </ul>
-            <div>
-                <Button className={(filterSt === 'all' && s.filter) + ''} name={'All'} callback={() => { changeFilter('all') }} />
-                <Button className={(filterSt === 'active' && s.filter) + ''} name={'Active'} callback={() => { changeFilter('active') }} />
-                <Button className={(filterSt === 'completed' && s.filter) + ''} name={'Completed'} callback={() => { changeFilter('completed') }} />
-                <Button className={(filterSt === 'three' && s.filter) + ''} name={'Three'} callback={() => { changeFilter('three') }} />
-            </div>
-            <div>
-                <button onClick={removeAllButtononClickHandler}>remove all tasks</button>
-            </div>
+            <Input setInpSt={setInpSt} value={inpSt} callback={addTask} className={(errorSt && s.error) + ''} />
+            {/* <SuperInput value={inpSt} callback={addTask} /> */}
+            <Button className={''} name={'+'} callback={addTask} />
         </div>
-    )
+        {errorSt && <div className={s.errorMessage}>{errorSt}</div>}
+        <ul ref={listRef}>
+            {filteredTasks.map(el => {
+                return (
+                    <li key={el.taskId}>
+                        <Button className={''} name={'x'} callback={() => { onClickHandler(el.taskId) }} />
+                        <Checkbox isDone={el.isDone} callback={(e) => onCheckboxClickHandler(el.taskId, e)} />
+                        <span>{el.title}</span>
+                    </li>
+                )
+            })}
+        </ul>
+        <div>
+            <Button className={(filterSt === 'all' && s.filter) + ''} name={'All'} callback={() => { changeTodolistFilter('all',todolistId) }} />
+            <Button className={(filterSt === 'active' && s.filter) + ''} name={'Active'} callback={() => { changeTodolistFilter('active',todolistId) }} />
+            <Button className={(filterSt === 'completed' && s.filter) + ''} name={'Completed'} callback={() => { changeTodolistFilter('completed',todolistId) }} />
+            <Button className={(filterSt === 'three' && s.filter) + ''} name={'Three'} callback={() => { changeTodolistFilter('three',todolistId) }} />
+        </div>
+        <div>
+            <button onClick={removeAllButtononClickHandler}>remove all tasks</button>
+        </div>
+    </div>
+)
 }
 
 
