@@ -5,7 +5,7 @@ import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Checkbox } from "./Checkbox";
 import s from './Todolist.module.css'
-import { TaskType, FilterType } from './Body'
+import { TaskType, FilterType } from './../state/state'
 
 type PropsType = {
     todolistId: string

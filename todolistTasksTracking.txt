@@ -7,7 +7,7 @@ week 4 17_04_2023 + checkboxHandler,trim+,error, styleOfError for input,
                     setFilter(для покраски кнопок 'all','completed',...).
                     hardTask(props) of Igor(i failed this).
 tuesday
-week 5 25_04_2023 + refactoring for a assotianed array state(did not make a filteration, filteredTasks is undefined)
+week 5 25_04_2023 + refactoring for a assotianed array state
 week 6 02_05_2023 - form of adding a newTodo, change title by doubleClick on title.
 week 7 09_05_2023 - part1(material ui)===NotCompoleted, part2(reducer)==completed
 week 8 16_05_2023 - unit-test for reducer
@@ -95,3 +95,64 @@ week 3
 week 4
 -------- end from lessonsVideoByDimych---------
 
+
+управляемый компонент :
+export const Component = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <button>Отправить</button>
+    </div>
+  );
+};
+
+или если разбить по файлам:
+const InputField = ({ value, onChange }) => {
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={onChange}
+    />
+  );
+};
+
+const Button = ({ onClick, children }) => {
+  return (
+    <button type="button" onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+
+const Component = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    // Действия, которые нужно выполнить при клике
+  };
+
+  return (
+    <div>
+      <InputField
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <Button onClick={handleButtonClick}>Отправить</Button>
+    </div>
+  );
+};
