@@ -4,8 +4,8 @@ import { Input } from "./Input"
 export const AddTodolistItem = () => {
     return (
         <div>
-            <Input />
-            <Button />
+            {/* <Input />
+            <Button /> */}
         </div>
     )
 }
