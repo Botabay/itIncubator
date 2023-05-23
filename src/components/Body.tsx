@@ -49,7 +49,7 @@ export const Body = () => {
   const addTask = (value: string, todolistId: string) =>{
     setTasksSt({ ...tasksSt, [todolistId]: 
       [{taskId:v1(),title:value,isDone:false},...tasksSt[todolistId]] });
-    filteredTasks = tasksSt[todolistId];
+    // filteredTasks = tasksSt[todolistId];
   }
 
   const removeAllTasks = (todolistId: string) =>
@@ -57,25 +57,15 @@ export const Body = () => {
 
   const removeTodolist=(todolistId: string)=>{
     setTodolistsSt(todolistsSt.filter(el=>el.todolistId!==todolistId));
-    const copy = {...tasks}
+    const copy = {...tasksSt}
     delete copy[todolistId]
     setTasksSt(copy)
   }
-  const changeTodolistFilter = (filter: FilterType, todolistId: string) =>
-    setTodolistsSt(todolists.map(el=>el.todolistId===todolistId?{...el,filter:filter}:el))
-    // setTodolistsSt(todolists.filter(el=>el.filter===filter))
-
-
-  // const addTask = (todolistId: string) => {
-  //   // if (inpSt.trim() !== '') {
-  //     setTasksSt([{ taskId: v1(), title: inpSt.trim(), isDone: false }, ...tasksSt])
-      // filteredTasks = tasks;
-      // setInpSt('');
-      // setErrorSt('')
-    // } else {
-    //   setErrorSt('empty string')
-    // }
-  // }
+  const changeTodolistFilter = (filter: FilterType, todolistId: string) =>{
+    console.log(todolists);
+    
+    setTodolistsSt(todolistsSt.map(el=>el.todolistId===todolistId?{...el,filter:filter}:el))
+  }
 
   const changeTaskStatus = (taskId: string, e: boolean, todolistId: string) => 
     setTasksSt({...tasksSt,[todolistId]:tasksSt[todolistId]
@@ -83,7 +73,7 @@ export const Body = () => {
   
     const filteredTasksCalc = (tasks:TaskType[],filter:FilterType) => {
       switch (filter) {
-        case 'active': return tasks.filter(el => !el.isDone);
+        case 'active': return tasks.filter(el => !el.isDone);//?
         case 'completed': return tasks.filter(el => el.isDone);
         default: return tasks
       }
@@ -97,6 +87,7 @@ export const Body = () => {
 
         return (
           <Todolist
+            key={el.todolistId}
             todolistId={el.todolistId}
             title={el.title}
             filter={el.filter}            

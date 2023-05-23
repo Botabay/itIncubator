@@ -1,39 +1,56 @@
 -------- begin from lessons----------
+monday
 week 1 +
 week 2 +
 week 3 +
 week 4 17_04_2023 + checkboxHandler,trim+,error, styleOfError for input, 
                     setFilter(для покраски кнопок 'all','completed',...).
                     hardTask(props) of Igor(i failed this).
-----week 5 25_04_2023 - refactoring for a assotianed array state
+tuesday
+week 5 25_04_2023 + refactoring for a assotianed array state(did not make a filteration, filteredTasks is undefined)
+week 6 02_05_2023 - form of adding a newTodo, change title by doubleClick on title.
+week 7 09_05_2023 - part1(material ui)===NotCompoleted, part2(reducer)==completed
+week 8 16_05_2023 - unit-test for reducer
+wednesday
 -------- end from lessons------------
 
 
 -------- begin from addLessons----------
+monday
 #1 12.04.2023 + superbutton
 #2 14.04.2023 + request to server,json,useEffect,useState,useRef. hide|show tasksList,add task,superInput(setState at props)&superButton(useful).(HOW TO DO A WORKING ONCHANGE+ONKEYDOWN FOR INPUT)
+tuesday
 #3 26.04.2023 - 
---#4 28.04.2023 - routing
+#4 28.04.2023 - routing
+#5 03.05.2023 - adding 'id' to state
+#6 04.05.2023- styeledComponents,routing(hook for "go back or forward"), custom hooks
+wednesday
 -------- end from addLessons---------
 
 
--------- begin from notRequiredMicroAdds----------
+-------- begin from notRequiredMicroAdds(forTodolist)----------
+monday
 week 1 +
 week 2 +
 week 3 + how to type the useRef() initialValue????????????
 week 4 + to wrap the filter-actions, apply a switch to filter
-week 5 does not exist
-week 6 does not exist
+tuesday does not exist
+wednesday
+week 9 does not exist
 -------- end from notRequiredMicroAdds---------
 
 
 -------- begin from microtasks----------
+monday
 week 1 +
 week 2 + made varint2(it's non-uniButton)
 week 3 does not exist
 week 4 does not exist
+tuesday
 week 5 - like lesson5
-week 6 does not exist
+week 6,7,8 does not exist
+wednesday
+week 9 does not exist
 -------- end from microtasks---------
 
 
@@ -42,18 +59,32 @@ week 6 does not exist
 -----------------------------------------------------------------------------------------------------
 
 -------- begin from autoCheckHomework----------
+monday
 week 1 
 week 2 
 week 3
 week 4
+tuesday
+week 5
+week 6
+week 7
+week 8
+wednesday
 -------- end from autoCheckHomework---------
 
 
 -------- begin from samur_kabzda----------
+monday
 week 1 
 week 2 
 week 3
 week 4
+tuesday
+week 5
+week 6
+week 7
+week 8
+wednesday
 -------- end from samur_kabzda---------
 
 
@@ -64,32 +95,3 @@ week 3
 week 4
 -------- end from lessonsVideoByDimych---------
 
-
-
-для addLessons4
-export const dataState: DataStateType = {
-    pages:
-        [
-            {
-                heading: "Цикл while",
-                about: " Цикл while имеет следующий синтаксис: ",
-            },
-            {
-                heading: "Цикл for",
-                about: " Цикл for имеет следующий синтаксис: ",
-            },
-            {
-                heading: "Конструкция \"switch\"",
-                about: " Конструкция switch заменяет собой сразу несколько if.",
-            },
-        ],
-}
-
-export type DataStateType = {
-    pages: Array<PagesType>
-}
-
-export type PagesType = {
-    heading: string
-    about: string
-}

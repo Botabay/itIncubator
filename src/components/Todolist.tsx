@@ -41,7 +41,7 @@ export const Todolist = ({
     const [inpSt, setInpSt] = useState<string>('');
     const [errorSt, setErrorSt] = useState<string>('')
     const f=(v:FilterType)=>changeTodolistFilter(v,todolistId)
-    debugger;
+    // debugger;
     return (
         <div>
             <h3>{title} <button onClick={() => removeTodolist(todolistId)}>remove todolist</button></h3>
