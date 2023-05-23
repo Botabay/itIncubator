@@ -156,3 +156,63 @@ const Component = () => {
     </div>
   );
 };
+
+--------
+import React, { useState, ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
+
+interface InputFieldProps {
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
+}
+
+const InputField: React.FC<InputFieldProps> = ({ value, onChange, onKeyDown }) => {
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+    />
+  );
+};
+
+interface ButtonProps {
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  children: React.ReactNode;
+}
+
+const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
+  return (
+    <button type="button" onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+
+const Component: React.FC = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    // Действия, которые нужно выполнить при нажатии клавиши
+  };
+
+  const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
+    // Действия, которые нужно выполнить при клике
+  };
+
+  return (
+    <div>
+      <InputField
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+      />
+      <Button onClick={handleSubmit}>Отправить</Button>
+    </div>
+  );
+};

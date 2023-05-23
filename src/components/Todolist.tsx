@@ -5,6 +5,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Checkbox } from "./Checkbox";
 import s from './Todolist.module.css'
 import { TaskType, FilterType } from './../state/state'
+import { ContainerComponent } from './ContainerComponent';
 
 type PropsType = {
     todolistId: string
@@ -41,28 +42,23 @@ export const Todolist = ({
     const [errorSt, setErrorSt] = useState<string>('')
     const f = (v: FilterType) => changeTodolistFilter(v, todolistId)
 
-    const secAddTask=(e)=>{
-        addTask(e,todolistId);
-    }
+
 
     return (
         <div>
             <h3>{title} <button onClick={() => removeTodolist(todolistId)}>remove todolist</button></h3>
-            <div>
-                <Input 
-                value={inpSt} 
-                onChange={(e:) => secAddTask(e)} 
-                className={(errorSt && s.error) + ''} 
-                />
-                <Button className={''} name={'+'} callback={() => addTask(inpSt, todolistId)} />
-            </div>
+            <ContainerComponent
+                todolistId={todolistId}
+                addTask={addTask}
+            />
             {errorSt && <div className={s.errorMessage}>{errorSt}</div>}
             <ul ref={listRef}>
 
                 {filteredTasks.map(el => {
                     return (
                         <li key={el.taskId}>
-                            <ContainerComponent />
+                            <Button className={''} name={'x'} callback={() => { removeTask(el.taskId, todolistId) }} />
+                            <Checkbox isDone={el.isDone} callback={(e) => changeTaskStatus(el.taskId, e, todolistId)} />
                             <span>{el.title}</span>
                         </li>
                     )

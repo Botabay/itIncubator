@@ -1,17 +1,27 @@
 import { Input } from "./Input";
 import { Button } from './Button'
+import { useState } from "react";
+import { KeyboardEvent, ChangeEvent } from "react";
 
-export const ContainerComponent = () => {
+type ContainerComponentProps = {
+    todolistId: string
+    addTask: (value: string, todolistId: string) => void
+}
+export const ContainerComponent = ({ addTask, todolistId }: ContainerComponentProps) => {
+    const [inpSt, setInpSt] = useState<string>('');
+
+    const secAddTask = (e) => {
+        addTask(e, todolistId);
+    }
+
     return (
         <div>
-            <Button
-                className={''} name={'x'}
-                callback={() => { removeTask(el.taskId, todolistId) }}
+            <Input
+                value={inpSt}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => secAddTask(e)}
+                className={(errorSt && s.error) + ''}
             />
-            <Checkbox
-                isDone={el.isDone}
-                callback={(e) => changeTaskStatus(el.taskId, e, todolistId)}
-            />
+            <Button className={''} name={'+'} callback={() => addTask(inpSt, todolistId)} />
         </div>
     )
 }

@@ -2,6 +2,7 @@ import { KeyboardEvent, ChangeEvent } from "react";
 type PropsType = {
     value: string
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
     className: string
 }
 export const Input = ({
@@ -11,9 +12,9 @@ export const Input = ({
     className
 }: PropsType) => {
     const onChangeHandler =
-        (e: ChangeEvent<HTMLInputElement>) => onChange(e.currentTarget.value)
+        (e: ChangeEvent<HTMLInputElement>) => onChange(e)
     const onKeyDownHandler =
-        (e: KeyboardEvent<HTMLInputElement>) => (e.key === "Enter") && onChange(e: ChangeEvent<HTMLInputElement>)
+        (e: KeyboardEvent<HTMLInputElement>) => (e.key === "Enter") && onChange(e)
     return (
         <input type="text"
             onChange={onChangeHandler}
