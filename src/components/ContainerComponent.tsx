@@ -9,17 +9,16 @@ type ContainerComponentProps = {
 }
 export const ContainerComponent = ({ addTask, todolistId }: ContainerComponentProps) => {
     const [inpSt, setInpSt] = useState<string>('');
-
-    const secAddTask = (e) => {
-        addTask(e, todolistId);
-    }
-
     return (
         <div>
             <Input
                 value={inpSt}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => secAddTask(e)}
-                className={(errorSt && s.error) + ''}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setInpSt(e.currentTarget.value)}
+                onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && addTask(inpSt, todolistId)}
+                className={
+                    //(errorSt && s.error) + 
+                    ''
+                }
             />
             <Button className={''} name={'+'} callback={() => addTask(inpSt, todolistId)} />
         </div>
