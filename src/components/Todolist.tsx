@@ -40,19 +40,18 @@ export const Todolist = ({
     const [listRef] = useAutoAnimate<HTMLUListElement>()
     const [inpSt, setInpSt] = useState<string>('');
     const [errorSt, setErrorSt] = useState<string>('')
-    const f=(v:FilterType)=>changeTodolistFilter(v,todolistId)
-    // debugger;
+    const f = (v: FilterType) => changeTodolistFilter(v, todolistId)
     return (
         <div>
             <h3>{title} <button onClick={() => removeTodolist(todolistId)}>remove todolist</button></h3>
             <div>
-                <Input setInpSt={setInpSt} value={inpSt} callback={()=>addTask(inpSt,todolistId)} className={(errorSt && s.error) + ''} />
+                <Input setInpSt={setInpSt} value={inpSt} callback={() => addTask(inpSt, todolistId)} className={(errorSt && s.error) + ''} />
                 {/* <SuperInput value={inpSt} setInpSt={setInpSt} /> */}
                 <Button className={''} name={'+'} callback={() => addTask(inpSt, todolistId)} />
             </div>
             {errorSt && <div className={s.errorMessage}>{errorSt}</div>}
             <ul ref={listRef}>
-               
+
                 {filteredTasks.map(el => {
                     return (
                         <li key={el.taskId}>
