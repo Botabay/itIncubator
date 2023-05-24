@@ -50,6 +50,7 @@ export const Body = () => {
 		switch (filter) {
 			case 'active': return tasks.filter(el => !el.isDone);
 			case 'completed': return tasks.filter(el => el.isDone);
+			case 'three': return tasks.filter((el, ind) => ind < 3);
 			default: return tasks
 		}
 	}

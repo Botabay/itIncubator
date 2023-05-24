@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { Input } from "./Input";
 import { Button } from './Button'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Checkbox } from "./Checkbox";
-import s from './Todolist.module.css'
-import { TaskType, FilterType } from './../state/state'
+import s from './Todolist.module.css';
+import { TaskType, FilterType } from './../state/state';
 import { ContainerComponent } from './ContainerComponent';
 
 type PropsType = {
@@ -22,7 +21,6 @@ type PropsType = {
     removeTodolist: (todolistId: string) => void
 }
 
-
 export const Todolist = ({
     todolistId,
     title,
@@ -38,44 +36,70 @@ export const Todolist = ({
     removeTodolist
 }: PropsType) => {
     const [listRef] = useAutoAnimate<HTMLUListElement>()
-    const [inpSt, setInpSt] = useState<string>('');
-    const [errorSt, setErrorSt] = useState<string>('')
     const f = (v: FilterType) => changeTodolistFilter(v, todolistId)
-
-
 
     return (
         <div>
-            <h3>{title} <button onClick={() => removeTodolist(todolistId)}>remove todolist</button></h3>
+            <h3>
+                {title}
+                <Button
+                    name={'remove todolist'}
+                    onClick={() => removeTodolist(todolistId)}
+                    className={''}
+                />
+            </h3>
             <ContainerComponent
                 todolistId={todolistId}
                 addTask={addTask}
             />
-            {errorSt && <div className={s.errorMessage}>{errorSt}</div>}
+            
             <ul ref={listRef}>
 
                 {filteredTasks.map(el => {
                     return (
                         <li key={el.taskId}>
-                            <Button className={''} name={'x'} callback={() => { removeTask(el.taskId, todolistId) }} />
-                            <Checkbox isDone={el.isDone} callback={(e) => changeTaskStatus(el.taskId, e, todolistId)} />
+                            <Button
+                                name={'x'}
+                                className={''}
+                                onClick={() => { removeTask(el.taskId, todolistId) }}
+                            />
+                            <Checkbox
+                                isDone={el.isDone}
+                                callback={(e) => changeTaskStatus(el.taskId, e, todolistId)}
+                            />
                             <span>{el.title}</span>
                         </li>
                     )
                 })}
             </ul>
             <div>
-                <Button className={(filter === 'all' && s.filter) + ''}
-                    name={'All'} callback={() => { f('all') }} />
-                <Button className={(filter === 'active' && s.filter) + ''}
-                    name={'Active'} callback={() => { f('active') }} />
-                <Button className={(filter === 'completed' && s.filter) + ''}
-                    name={'Completed'} callback={() => { f('completed') }} />
-                <Button className={(filter === 'three' && s.filter) + ''}
-                    name={'Three'} callback={() => { f('three') }} />
+                <Button
+                    name={'All'}
+                    className={(filter === 'all' && s.filter) + ''}
+                    onClick={() => { f('all') }}
+                />
+                <Button
+                    name={'Active'}
+                    className={(filter === 'active' && s.filter) + ''}
+                    onClick={() => { f('active') }}
+                />
+                <Button
+                    name={'Completed'}
+                    className={(filter === 'completed' && s.filter) + ''}
+                    onClick={() => { f('completed') }}
+                />
+                <Button
+                    name={'Three'}
+                    className={(filter === 'three' && s.filter) + ''}
+                    onClick={() => { f('three') }}
+                />
             </div>
             <div>
-                <button onClick={() => removeAllTasks(todolistId)}>remove all tasks</button>
+                <Button
+                    name={'remove all tasks'}
+                    onClick={() => removeAllTasks(todolistId)}
+                    className={''}
+                />
             </div>
         </div>
     )

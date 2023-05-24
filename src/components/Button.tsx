@@ -1,11 +1,10 @@
 type PropsType = {
     name: string
-    callback: () => void
+    onClick: () => void
     className: string
 }
-export const Button = ({ name, callback, className }: PropsType) => {
-    const onClickHandler = () => callback()
+export const Button = ({ name, onClick, className }: PropsType) => {
     return (
-        <button className={className} onClick={onClickHandler}>{name}</button>
+        <button className={className} onClick={onClick}>{name}</button>
     )
 }
