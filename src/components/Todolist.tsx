@@ -16,6 +16,7 @@ type PropsType = {
     removeAllTasks: (todolistId: string) => void
     addTask: (value: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, e: boolean, todolistId: string) => void
+    changeTaskTitle: (taskId: string, title: string, todolistId: string) => void
 
     changeTodolistFilter: (filter: FilterType, todolistId: string) => void
     removeTodolist: (todolistId: string) => void
@@ -31,6 +32,7 @@ export const Todolist = ({
     removeAllTasks,
     addTask,
     changeTaskStatus,
+    changeTaskTitle,
 
     changeTodolistFilter,
     removeTodolist
@@ -69,7 +71,7 @@ export const Todolist = ({
                                 isDone={el.isDone}
                                 callback={(e) => changeTaskStatus(el.taskId, e, todolistId)}
                             />
-                            <EditableSpan text={el.title} />
+                            <EditableSpan text={el.title} callback={(e) => changeTaskTitle(el.taskId, e, todolistId)} />
                         </li>
                     )
                 })}

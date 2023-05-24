@@ -8,7 +8,7 @@ week 4 17_04_2023 + checkboxHandler,trim+,error, styleOfError for input,
                     hardTask(props) of Igor(i failed this).
 tuesday
 week 5 25_04_2023 + refactoring for a assotianed array state
-week 6 02_05_2023 - form of adding a newTodo, change title by doubleClick on title.
+week 6 02_05_2023 - form of adding a newTodolist, change title by doubleClick on title.
 week 7 09_05_2023 - part1(material ui)===NotCompoleted, part2(reducer)==completed
 week 8 16_05_2023 - unit-test for reducer
 wednesday

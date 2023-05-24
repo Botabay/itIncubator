@@ -41,7 +41,7 @@ export const Body = () => {
 	const addTodolist = (title: string) => {
 		const todolistId = v1();
 		setTodolistsSt([...todolistsSt, { todolistId, title, filter: 'all' }]);
-		setTasksSt({...tasksSt,[todolistId]:[]})
+		setTasksSt({ ...tasksSt, [todolistId]: [] })
 	}
 
 	const changeTodolistFilter = (filter: FilterType, todolistId: string) =>
@@ -51,7 +51,13 @@ export const Body = () => {
 	const changeTaskStatus = (taskId: string, e: boolean, todolistId: string) =>
 		setTasksSt({
 			...tasksSt, [todolistId]: tasksSt[todolistId]
-				.map(el => el.taskId === taskId ? { ...el, isDone: !el.isDone } : el)
+				.map(el => el.taskId === taskId ? { ...el, isDone: e } : el)
+		})
+
+	const changeTaskTitle = (taskId: string, title: string, todolistId: string) =>
+		setTasksSt({
+			...tasksSt, [todolistId]: tasksSt[todolistId]
+				.map(el => el.taskId === taskId ? { ...el, title, } : el)
 		})
 
 	const filteredTasksCalc = (tasks: TaskType[], filter: FilterType) => {
@@ -84,6 +90,7 @@ export const Body = () => {
 							removeAllTasks={removeAllTasks}
 							addTask={addTask}
 							changeTaskStatus={changeTaskStatus}
+							changeTaskTitle={changeTaskTitle}
 
 							changeTodolistFilter={changeTodolistFilter}
 							removeTodolist={removeTodolist}
