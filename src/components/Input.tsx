@@ -1,4 +1,5 @@
 import { KeyboardEvent, ChangeEvent } from "react";
+
 type PropsType = {
     value: string
     className: string
@@ -11,6 +12,7 @@ export const Input = ({
     onChange,
     onKeyDown
 }: PropsType) => {
+
     return (
         <input type="text"
             onChange={onChange}

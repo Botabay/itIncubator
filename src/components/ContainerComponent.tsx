@@ -8,22 +8,50 @@ type ContainerComponentProps = {
     todolistId: string
     addTask: (value: string, todolistId: string) => void
 }
-export const ContainerComponent = ({ addTask, todolistId }: ContainerComponentProps) => {
+
+export const ContainerComponent = ({
+    addTask,
+    todolistId
+}: ContainerComponentProps) => {
+
     const [inpSt, setInpSt] = useState<string>('');
-    const [errorSt, setErrorSt] = useState<string>('')
-    const onChange = (e: ChangeEvent<HTMLInputElement>) =>
-        setInpSt(e.currentTarget.value);
-    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) =>
-        e.key === 'Enter' && addTask(inpSt, todolistId)
+    const [errorSt, setErrorSt] = useState<string>('');
+    const ERROR_MESSAGE = 'wrong string, should not contain only spaces or to be empty';
+
+    const checkValue = () => {
+        const value = inpSt.trim();
+        if (value) {
+            addTask(value, todolistId);
+            setErrorSt('')
+        } else {
+            setErrorSt(ERROR_MESSAGE)
+        }
+    }
+
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>) =>
+        setInpSt(e.currentTarget.value)
+
+    const onInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            checkValue()
+        }
+    }
+
+    const onButtonClick = () => checkValue()
+    
     return (
         <div>
             <Input
                 value={inpSt}
-                onChange={onChange}
-                onKeyDown={onKeyDown}
+                onChange={onInputChange}
+                onKeyDown={onInputKeyDown}
                 className={(errorSt && s.error) + ''}
             />
-            <Button className={''} name={'+'} onClick={() => addTask(inpSt, todolistId)} />
+            <Button
+                className={''}
+                name={'+'}
+                onClick={onButtonClick}
+            />
             {errorSt && <div className={s.errorMessage}>{errorSt}</div>}
         </div>
     )
