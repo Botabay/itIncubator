@@ -4,6 +4,7 @@ import { Checkbox } from "./Checkbox";
 import s from './Todolist.module.css';
 import { TaskType, FilterType } from './../state/state';
 import { AddItem } from './AddItem';
+import { EditableSpan } from './EditableSpan';
 
 type PropsType = {
     todolistId: string
@@ -36,8 +37,8 @@ export const Todolist = ({
 }: PropsType) => {
     const [listRef] = useAutoAnimate<HTMLUListElement>()
     const f = (v: FilterType) => changeTodolistFilter(v, todolistId)
-    const addTaskWithId=(value:string)=>{
-        addTask(value,todolistId)
+    const addTaskWithId = (value: string) => {
+        addTask(value, todolistId)
     }
     return (
         <div>
@@ -68,7 +69,7 @@ export const Todolist = ({
                                 isDone={el.isDone}
                                 callback={(e) => changeTaskStatus(el.taskId, e, todolistId)}
                             />
-                            <span>{el.title}</span>
+                            <EditableSpan text={el.title} />
                         </li>
                     )
                 })}

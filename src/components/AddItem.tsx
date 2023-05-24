@@ -49,6 +49,7 @@ export const AddItem = ({
                 onChange={onInputChange}
                 onKeyDown={onInputKeyDown}
                 className={(errorSt && s.error) + ''}
+                onBlur={()=>{}}
             />
             <Button
                 className={''}

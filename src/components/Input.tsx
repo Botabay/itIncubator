@@ -1,16 +1,18 @@
-import { KeyboardEvent, ChangeEvent } from "react";
+import { KeyboardEvent, ChangeEvent, FocusEvent } from "react";
 
 type PropsType = {
     value: string
     className: string
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
     onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+    onBlur:(e:FocusEvent<HTMLInputElement, Element>)=>void
 }
 export const Input = ({
     value,
     className,
     onChange,
-    onKeyDown
+    onKeyDown,
+    onBlur=()=>{}
 }: PropsType) => {
 
     return (
@@ -19,6 +21,7 @@ export const Input = ({
             value={value}
             className={className}
             onKeyDown={onKeyDown}
+            onBlur={onBlur}
         />
     )
 }
