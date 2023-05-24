@@ -8,6 +8,7 @@ import {
 	FilterType,
 	TasksType, TaskType
 } from '../state/state';
+import { AddItem } from './AddItem';
 
 export const Body = () => {
 
@@ -36,6 +37,13 @@ export const Body = () => {
 		delete copy[todolistId]
 		setTasksSt(copy)
 	}
+
+	const addTodolist = (title: string) => {
+		const todolistId = v1();
+		setTodolistsSt([...todolistsSt, { todolistId, title, filter: 'all' }]);
+		setTasksSt({...tasksSt,[todolistId]:[]})
+	}
+
 	const changeTodolistFilter = (filter: FilterType, todolistId: string) =>
 		setTodolistsSt(todolistsSt.map(el => el.todolistId === todolistId ? { ...el, filter: filter } : el))
 
@@ -57,6 +65,10 @@ export const Body = () => {
 
 	return (
 		<div>
+			<AddItem
+				itemTitle={'add todolist'}
+				addTask={addTodolist}
+			/>
 			{
 				todolistsSt.map(el => {
 					const filteredTasks = filteredTasksCalc(tasksSt[el.todolistId], el.filter)

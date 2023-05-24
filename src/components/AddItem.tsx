@@ -5,13 +5,13 @@ import { KeyboardEvent, ChangeEvent } from "react";
 import s from './Todolist.module.css'
 
 type ContainerComponentProps = {
-    todolistId: string
-    addTask: (value: string, todolistId: string) => void
+    itemTitle: string
+    addTask: (value: string) => void
 }
 
-export const ContainerComponent = ({
-    addTask,
-    todolistId
+export const AddItem = ({
+    itemTitle,
+    addTask
 }: ContainerComponentProps) => {
 
     const [inpSt, setInpSt] = useState<string>('');
@@ -21,15 +21,17 @@ export const ContainerComponent = ({
     const checkValue = () => {
         const value = inpSt.trim();
         if (value) {
-            addTask(value, todolistId);
+            addTask(value);
             setErrorSt('')
         } else {
             setErrorSt(ERROR_MESSAGE)
         }
     }
 
-    const onInputChange = (e: ChangeEvent<HTMLInputElement>) =>
-        setInpSt(e.currentTarget.value)
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setErrorSt('');
+        setInpSt(e.currentTarget.value);
+    }
 
     const onInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -38,9 +40,10 @@ export const ContainerComponent = ({
     }
 
     const onButtonClick = () => checkValue()
-    
+
     return (
         <div>
+            {itemTitle}
             <Input
                 value={inpSt}
                 onChange={onInputChange}

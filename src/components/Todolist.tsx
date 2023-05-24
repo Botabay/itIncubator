@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { Button } from './Button'
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Checkbox } from "./Checkbox";
 import s from './Todolist.module.css';
 import { TaskType, FilterType } from './../state/state';
-import { ContainerComponent } from './ContainerComponent';
+import { AddItem } from './AddItem';
 
 type PropsType = {
     todolistId: string
@@ -37,7 +36,9 @@ export const Todolist = ({
 }: PropsType) => {
     const [listRef] = useAutoAnimate<HTMLUListElement>()
     const f = (v: FilterType) => changeTodolistFilter(v, todolistId)
-
+    const addTaskWithId=(value:string)=>{
+        addTask(value,todolistId)
+    }
     return (
         <div>
             <h3>
@@ -48,11 +49,11 @@ export const Todolist = ({
                     className={''}
                 />
             </h3>
-            <ContainerComponent
-                todolistId={todolistId}
-                addTask={addTask}
+            <AddItem
+                itemTitle={'add task'}
+                addTask={addTaskWithId}
             />
-            
+
             <ul ref={listRef}>
 
                 {filteredTasks.map(el => {
